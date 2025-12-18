@@ -1,5 +1,4 @@
 <?php
-// about.php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -7,110 +6,130 @@ if (session_status() === PHP_SESSION_NONE) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - CareerNiTi</title>
-    <link rel="icon" type="image/png" href="../assets/images/Careerniti_logo.png">
-    <link href="../assets/css/tailwind.css" rel="stylesheet">
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us - CareerNiTi</title>
+<meta name="description" content="Learn about CareerNiTi's mission, vision, services, and how we empower students across India to achieve their career goals.">
+<meta name="keywords" content="Career guidance, Admission support, Exam counselling, CareerNiTi, Education India">
+<link rel="icon" type="image/png" href="../assets/images/Careerniti_logo.png">
+<link href="../assets/css/output.css" rel="stylesheet">
 </head>
-<body class="font-sans antialiased bg-orange-50">
+<body class="bg-orange-50 font-sans antialiased">
 
-    <!-- Navbar -->
-    <?php include_once '../includes/navbar.php'; ?>
+<!-- Navbar -->
+<?php include_once '../includes/navbar.php'; ?>
 
-    <!-- Header Section -->
-<header class="relative text-center py-6 sm:py-10 bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-xl rounded-b-3xl">
-    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-wide">
-        About Us
-    </h1>
-    <p class="mt-2 text-xs sm:text-sm md:text-base opacity-90 px-4">
-        Learn more about our mission, values & vision.
+<div class="h-20"></div>
+
+<!-- Breadcrumb -->
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-sm text-gray-600">
+    <a href="../index.php" class="hover:text-orange-600">Home</a> &gt; <span>About Us</span>
+</div>
+
+<!-- Header -->
+<header class="text-center py-12 bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md">
+    <h1 class="text-3xl md:text-4xl font-extrabold tracking-wide">About Us</h1>
+    <p class="mt-3 text-sm md:text-base opacity-90 max-w-xl mx-auto">
+        Empowering students across India with structured career guidance and support.
     </p>
 </header>
 
+<main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
 
-    <!-- About Us Content -->
-    <section class="max-w-5xl mx-auto px-5 sm:px-8 mt-10 space-y-8">
-        <div class="bg-white rounded-3xl shadow-xl p-6 sm:p-10 border border-orange-100">
-            <h2 class="text-2xl font-bold mb-4 text-orange-600">Welcome to CareerNiTi</h2>
-            <p class="mb-4">
-                CareerNiTi is your singular solution for a bright future. Since 2021, we have been transforming students' confusion into clarity by providing comprehensive career guidance and admission support across India. Through personalized mentorship and a compassionate approach, we help students embark on a journey of self-discovery. By understanding their strengths and interests, we empower them to make informed decisions about their future.
-            </p>
-            <p class="mb-4">
-                We offer career guidance, career counselling, exam guidance, psychological counselling, and admission counselling, making course and college selection easy for students. Our platform provides a personalized experience based on educational background and career interests, enabling well-informed decisions.
-            </p>
-            <p class="mb-4">
-                With a legacy of commitment and excellence, we have counselled over 2,000 students, guided more than 10,000 students, and connected with 200 classes, fostering a tradition of personalized support and impactful educational experiences as a trusted educational partner.
-            </p>
-        </div>
+    <!-- Stylish About Card -->
+    <section class="relative bg-gradient-to-br from-white via-orange-50 to-white rounded-3xl shadow-2xl p-10 sm:p-16 space-y-8 overflow-hidden">
+        <!-- Decorative circles -->
+        <div class="absolute -top-16 -left-16 w-40 h-40 bg-orange-200 rounded-full opacity-20"></div>
+        <div class="absolute -bottom-16 -right-16 w-56 h-56 bg-red-200 rounded-full opacity-20"></div>
 
-        <!-- Mission & Vision Section -->
-        <div x-data="{ openSection: null }" class="space-y-4">
-            <!-- Vision -->
-            <div class="bg-white rounded-2xl shadow-lg p-4 border border-orange-100">
-                <button @click="openSection = openSection === 'vision' ? null : 'vision'" class="w-full flex justify-between items-center text-left focus:outline-none">
-                    <span class="text-orange-600 font-semibold">Our Vision</span>
-                    <svg :class="{'rotate-180': openSection === 'vision'}" class="h-5 w-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                    </svg>
-                </button>
-                <div x-show="openSection === 'vision'" x-transition class="mt-2 text-sm text-gray-700">
-                    At CareerNiTi, our bold vision is to revolutionize the Indian education landscape by decolonizing the mindset of our youth. We empower students to embrace their unique identities, ideas, and aspirations.
-                </div>
-            </div>
+        <h2 class="text-3xl font-bold text-orange-600 text-center">Welcome to CareerNiTi</h2>
+        
+        <p class="text-gray-700 leading-relaxed text-center max-w-3xl mx-auto">
+            CareerNiTi is your singular solution for a bright future. Since 2021, we have helped students across India transform confusion into clarity through structured career guidance and admission support.
+        </p>
+        
+        <p class="text-gray-700 leading-relaxed text-center max-w-3xl mx-auto">
+            We provide career guidance, counselling, exam mentoring, psychological support, and admission counselling, enabling students to make confident, informed decisions.
+        </p>
+        
+        <p class="text-gray-700 leading-relaxed text-center max-w-3xl mx-auto">
+            With over <strong>2,000 students counselled</strong> and <strong>10,000+ guided</strong>, CareerNiTi stands as a trusted educational partner.
+        </p>
 
-            <!-- Mission -->
-            <div class="bg-white rounded-2xl shadow-lg p-4 border border-orange-100">
-                <button @click="openSection = openSection === 'mission' ? null : 'mission'" class="w-full flex justify-between items-center text-left focus:outline-none">
-                    <span class="text-orange-600 font-semibold">Our Mission</span>
-                    <svg :class="{'rotate-180': openSection === 'mission'}" class="h-5 w-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                    </svg>
-                </button>
-                <div x-show="openSection === 'mission'" x-transition class="mt-2 text-sm text-gray-700">
-                    Rooted in the experiences of our founders, who emerged from middle-class backgrounds and navigated the challenges of education, our mission is to pay forward the opportunities they fought for. We are committed to providing comprehensive career guidance and admission support to students across India.
-                </div>
+        <!-- Mission & Vision -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition">
+                <h3 class="text-lg font-semibold text-orange-600 mb-2 flex items-center space-x-2">
+                    <span>🌟</span>
+                    <span>Our Vision</span>
+                </h3>
+                <p class="text-gray-700 leading-relaxed text-sm">
+                    To revolutionize the Indian education ecosystem by empowering students to discover their true potential and pursue careers aligned with their strengths.
+                </p>
             </div>
-        </div>
-
-        <!-- Premium Features Section -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
-            <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-2xl transition-shadow">
-                <h4 class="text-xl font-semibold text-orange-600 mb-2">Career Guidance</h4>
-                <p>Expert mentorship to explore your career paths and strengths.</p>
+            <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition">
+                <h3 class="text-lg font-semibold text-orange-600 mb-2 flex items-center space-x-2">
+                    <span>🎯</span>
+                    <span>Our Mission</span>
+                </h3>
+                <p class="text-gray-700 leading-relaxed text-sm">
+                    To provide accessible, ethical, and personalized career guidance and admission support to students across India.
+                </p>
             </div>
-            <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-2xl transition-shadow">
-                <h4 class="text-xl font-semibold text-orange-600 mb-2">Admission Support</h4>
-                <p>Guidance in selecting colleges and courses tailored to you.</p>
-            </div>
-            <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-2xl transition-shadow">
-                <h4 class="text-xl font-semibold text-orange-600 mb-2">Exam Counselling</h4>
-                <p>Personalized coaching for exams like JEE, NEET, CAT, GATE, and more.</p>
-            </div>
-        </div>
-
-        <!-- Stats Section -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center mt-10">
-            <div class="bg-orange-100 rounded-2xl p-6 shadow-inner">
-                <p class="text-3xl font-bold text-orange-600">2000+</p>
-                <p>Students Counseled</p>
-            </div>
-            <div class="bg-orange-100 rounded-2xl p-6 shadow-inner">
-                <p class="text-3xl font-bold text-orange-600">10000+</p>
-                <p>Guided Students</p>
-            </div>
-            <div class="bg-orange-100 rounded-2xl p-6 shadow-inner">
-                <p class="text-3xl font-bold text-orange-600">200</p>
-                <p>Connected Classes</p>
+            <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition">
+                <h3 class="text-lg font-semibold text-orange-600 mb-2 flex items-center space-x-2">
+                    <span>💡</span>
+                    <span>Our Values</span>
+                </h3>
+                <ul class="text-gray-700 text-sm list-disc list-inside space-y-1">
+                    <li>Integrity & transparency</li>
+                    <li>Student-centric approach</li>
+                    <li>Innovation in mentoring</li>
+                    <li>Continuous learning</li>
+                    <li>Empowering decisions</li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <div class="py-10"></div>
+    <!-- Services Section -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-12">
+        <div class="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition">
+            <h4 class="text-lg font-semibold text-orange-600 mb-2">Career Guidance</h4>
+            <p class="text-gray-700 text-sm">Expert mentorship to explore strengths and career paths.</p>
+        </div>
+        <div class="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition">
+            <h4 class="text-lg font-semibold text-orange-600 mb-2">Admission Support</h4>
+            <p class="text-gray-700 text-sm">Personalized college and course selection.</p>
+        </div>
+        <div class="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition">
+            <h4 class="text-lg font-semibold text-orange-600 mb-2">Exam Counselling</h4>
+            <p class="text-gray-700 text-sm">Guidance for JEE, NEET, CAT, GATE & more.</p>
+        </div>
+    </section>
 
-    <!-- Footer -->
-    <?php include_once '../includes/footer.php'; ?>
+    <!-- Stats Section -->
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 text-center">
+        <div class="bg-orange-100 rounded-xl p-6">
+            <p class="text-3xl font-bold text-orange-600">2000+</p>
+            <p class="text-sm">Students Counseled</p>
+        </div>
+        <div class="bg-orange-100 rounded-xl p-6">
+            <p class="text-3xl font-bold text-orange-600">10000+</p>
+            <p class="text-sm">Guided Students</p>
+        </div>
+        <div class="bg-orange-100 rounded-xl p-6">
+            <p class="text-3xl font-bold text-orange-600">200+</p>
+            <p class="text-sm">Connected Classes</p>
+        </div>
+    </section>
+
+</main>
+
+<div class="py-16"></div>
+
+<!-- Footer -->
+<?php include_once '../includes/footer.php'; ?>
 
 </body>
 </html>
