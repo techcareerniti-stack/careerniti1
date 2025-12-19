@@ -10,192 +10,91 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | CareerNiTi</title>
 
-    <link href="../assets/css/output.css" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <link href="./assets/css/output.css" rel="stylesheet">
 </head>
 
-<body class="bg-[#1f2a44] font-core">
->
+<body>
 
-<?php include '../includes/navbar.php'; ?>
+<?php include("./includes/navbar.php"); ?>
 
-<!-- SPACE BELOW FIXED NAVBAR -->
-<div class="h-24"></div>
+<!-- Header -->
+<section>
+    <div class="bg-gradient-to-r from-orange-400 to-pink-600 py-10 text-center text-white">
+        <h1 class="text-3xl md:text-4xl font-bold">About Us</h1>
+        <p class="mt-2 text-sm md:text-base">Your singular solution for a bright future</p>
+    </div>
+</section>
 
-<!-- MAIN ABOUT SECTION -->
-<section class="max-w-7xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+<!-- Main Content -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-    <!-- HERO -->
-    <div class="px-6 md:px-12 py-14 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-800 animate-pulse">
-            About <span class="text-orange-500">CareerNiTi</span>
-        </h1>
-        <p class="mt-5 text-lg text-gray-600 max-w-4xl mx-auto">
-            Empowering students with clarity, confidence, and the right direction
-            to build successful academic and professional careers.
+    <!-- About Card -->
+    <div class="bg-white rounded-xl p-6 md:p-10 mb-10">
+        <h2 class="text-2xl md:text-3xl font-semibold mb-5">
+            Welcome to CareerNiTi
+        </h2>
+
+        <p class="mb-4 text-gray-700 leading-relaxed">
+            We have been transforming students' confusion into clarity since 2021 by providing
+            comprehensive career guidance and admission support across India.
+            Through personalised mentorship and a compassionate approach, we help students
+            embark on a journey of self-discovery.
+        </p>
+
+        <p class="mb-4 text-gray-700 leading-relaxed">
+            We offer career guidance, career counselling, exam guidance, psychological counselling,
+            and admission counselling — making course and college selection easy and stress-free.
+        </p>
+
+        <p class="text-gray-700 leading-relaxed">
+            With counselling provided to over <strong>2000+</strong> students and guidance
+            extended to <strong>10,000+</strong> learners, CareerNiTi stands as a trusted
+            educational partner across India.
         </p>
     </div>
 
-    <!-- WHO WE ARE -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 px-6 md:px-12 py-14 items-center">
-
-        <!-- TEXT -->
-        <div class="space-y-5">
-            <h2 class="text-3xl font-semibold text-gray-800">
-                Who We Are
-            </h2>
-
-            <p class="text-gray-600 leading-relaxed">
-                CareerNiTi is a career guidance and education consulting platform
-                designed to help students make informed academic and career decisions.
-            </p>
-
-            <p class="text-gray-600 leading-relaxed">
-                We bridge the gap between ambition and achievement by offering
-                expert counselling, structured mentoring, and exam-focused guidance.
+    <!-- Vision -->
+    <div class="grid md:grid-cols-2 gap-8 items-center mb-10 bg-white rounded-xl  p-6 md:p-10">
+        <div>
+            <h2 class="text-2xl font-semibold mb-4">Our Vision</h2>
+            <p class="text-gray-700 leading-relaxed">
+                Our vision is to revolutionise the Indian education landscape by decolonising
+                the mindset of youth. We aim to empower students to embrace their unique identities,
+                ideas, and aspirations beyond traditional boundaries.
             </p>
         </div>
-
-        <!-- IMAGE -->
-        <div class="flex justify-center">
-            <img src="../assets/images/student.jpg"
-                 alt="Career Guidance"
-                 class="w-full max-w-md rounded-xl shadow-lg">
+        <div>
+            <img 
+                src="./assets/images/vision.jpeg" 
+                alt="Our Vision" 
+                class="w-full h-auto rounded-lg object-cover"
+            >
         </div>
     </div>
 
-    <!-- MISSION & VISION -->
-    <div class="bg-gray-50 px-6 md:px-12 py-14">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-
-            <div class="bg-white p-8 rounded-xl shadow hover:shadow-lg transition">
-                <h3 class="text-2xl font-semibold text-gray-800 mb-3">
-                    Our Mission
-                </h3>
-                <p class="text-gray-600 leading-relaxed">
-                    To provide accessible, reliable, and result-oriented career
-                    guidance that empowers students to choose the right path
-                    with confidence.
-                </p>
-            </div>
-
-            <div class="bg-white p-8 rounded-xl shadow hover:shadow-lg transition">
-                <h3 class="text-2xl font-semibold text-gray-800 mb-3">
-                    Our Vision
-                </h3>
-                <p class="text-gray-600 leading-relaxed">
-                    To become a trusted career partner for students across India,
-                    shaping futures through knowledge, mentorship, and innovation.
-                </p>
-            </div>
-
+    <!-- Mission -->
+    <div class="grid md:grid-cols-2 gap-8 items-center bg-white rounded-xl p-6 md:p-10">
+        <div class="order-2 md:order-1">
+            <img 
+                src="./assets/images/misssion.jpg" 
+                alt="Our Mission" 
+                class="w-full h-auto rounded-lg object-cover"
+            >
         </div>
-    </div>
-
-    <!-- WHY CAREERNITI -->
-    <div class="px-6 md:px-12 py-14">
-        <h2 class="text-3xl font-semibold text-center text-gray-800 mb-10">
-            Why Choose CareerNiTi?
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-
-            <div class="p-6 rounded-xl border hover:border-orange-500 transition">
-                <h4 class="text-xl font-semibold text-gray-800 mb-2">
-                    Expert Guidance
-                </h4>
-                <p class="text-gray-600">
-                    Learn from experienced mentors and career counsellors.
-                </p>
-            </div>
-
-            <div class="p-6 rounded-xl border hover:border-orange-500 transition">
-                <h4 class="text-xl font-semibold text-gray-800 mb-2">
-                    Structured Approach
-                </h4>
-                <p class="text-gray-600">
-                    Clear roadmaps for admissions, exams, and career planning.
-                </p>
-            </div>
-
-            <div class="p-6 rounded-xl border hover:border-orange-500 transition">
-                <h4 class="text-xl font-semibold text-gray-800 mb-2">
-                    Student-Centric
-                </h4>
-                <p class="text-gray-600">
-                    Personalized support focused on real student needs.
-                </p>
-            </div>
-
+        <div class="order-1 md:order-2">
+            <h2 class="text-2xl font-semibold mb-4">Our Mission</h2>
+            <p class="text-gray-700 leading-relaxed">
+                Rooted in the experiences of our founders from middle-class backgrounds,
+                our mission is to provide accessible, honest, and comprehensive career guidance
+                and admission support to students across India — helping them succeed with confidence.
+            </p>
         </div>
-    </div>
-
-    <!-- FAQ SECTION -->
-<div class="bg-white px-6 py-12 border-t">
-    <div class="max-w-4xl mx-auto">
-
-        <h2 class="text-2xl font-semibold text-gray-800 text-center mb-8">
-            Frequently Asked Questions
-        </h2>
-
-        <div class="divide-y">
-
-            <!-- FAQ -->
-            <details class="py-4 group">
-                <summary class="flex justify-between items-center cursor-pointer text-gray-800 font-medium">
-                    <span>What is CareerNiTi?</span>
-                    <span class="text-gray-400 group-open:rotate-180 transition">+</span>
-                </summary>
-                <p class="mt-3 text-sm text-gray-600 leading-relaxed">
-                    CareerNiTi is a career guidance platform that helps students
-                    make informed academic and career decisions.
-                </p>
-            </details>
-
-            <details class="py-4 group">
-                <summary class="flex justify-between items-center cursor-pointer text-gray-800 font-medium">
-                    <span>Is CareerNiTi free to use?</span>
-                    <span class="text-gray-400 group-open:rotate-180 transition">+</span>
-                </summary>
-                <p class="mt-3 text-sm text-gray-600 leading-relaxed">
-                    We offer both free resources and premium personalized guidance
-                    based on student needs.
-                </p>
-            </details>
-
-            <details class="py-4 group">
-                <summary class="flex justify-between items-center cursor-pointer text-gray-800 font-medium">
-                    <span>Who can take guidance from CareerNiTi?</span>
-                    <span class="text-gray-400 group-open:rotate-180 transition">+</span>
-                </summary>
-                <p class="mt-3 text-sm text-gray-600 leading-relaxed">
-                    School students, college students, and graduates can benefit
-                    from CareerNiTi guidance.
-                </p>
-            </details>
-
-            <details class="py-4 group">
-                <summary class="flex justify-between items-center cursor-pointer text-gray-800 font-medium">
-                    <span>How do I book a counselling session?</span>
-                    <span class="text-gray-400 group-open:rotate-180 transition">+</span>
-                </summary>
-                <p class="mt-3 text-sm text-gray-600 leading-relaxed">
-                    After registration, students can book sessions through
-                    the CareerNiTi platform.
-                </p>
-            </details>
-
-        </div>
-
-    </div>
-</div>
-
-</div>
-
     </div>
 
 </section>
 
-<?php include_once '../includes/footer.php'; ?>
+<?php include("./includes/footer.php"); ?>
 
 </body>
 </html>
