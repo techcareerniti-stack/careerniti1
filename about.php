@@ -22,7 +22,6 @@ if (session_status() === PHP_SESSION_NONE) {
 <section>
     <div class="bg-gradient-to-r from-orange-400 to-pink-600 py-10 text-center text-white">
         <h1 class="text-3xl md:text-4xl font-bold">About Us</h1>
-        <p class="mt-2 text-sm md:text-base">Your singular solution for a bright future</p>
     </div>
 </section>
 
