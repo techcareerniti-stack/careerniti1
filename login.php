@@ -1,207 +1,106 @@
 <?php
 session_start();
 
+$error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
-
-    if ($username === 'student' && $password === '1234') {
-        $_SESSION['username'] = $username;
-        $_SESSION['role'] = 'student';
-        header('Location: dashboard.php');
-        exit();
-    } elseif ($username === 'teacher' && $password === '1234') {
-        $_SESSION['username'] = $username;
-        $_SESSION['role'] = 'teacher';
-        header('Location: dashboard.php');
-        exit();
-    } else {
-        $error = "Invalid username or password!";
-    }
+    // You can add your login validation here
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Premium Login</title>
+<title>Careerniti Login</title>
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
-body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#f0f2f5;
-}
-
-/* Container */
-.container{
-    width:820px;
-    max-width:95%;
-    display:flex;
-    background:#fff;
-    border-radius:20px;
-    overflow:hidden;
-    box-shadow:0 15px 40px rgba(0,0,0,0.2);
-}
-
-/* RIGHT IMAGE */
-.left{
-    flex:1;
-    background-image:url("./assets/images/login1.png");
-    background-repeat:no-repeat;
-    background-size:cover;
-    background-position:center;
-    min-height:500px;
-    position:relative;
-}
-.left::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,0.2);
-}
-
-/* LEFT FORM */
-.right{
-    flex:1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:30px 10px;
-}
-
-.login-card{
-    width:100%;
-    max-width:350px;
-}
-
-.toggle{
-    display:flex;
-    justify-content:center;
-    margin-bottom:25px;
-}
-
-.toggle button{
-    padding:10px 25px;
-    border:none;
-    background:#e0e0e0;
-    cursor:pointer;
-    font-weight:600;
-    border-radius:50px;
-    margin:0 5px;
-}
-
-.toggle button.active{
-    background:linear-gradient(to right,#6a11cb,#2575fc);
-    color:#fff;
-}
-
-h2{
-    text-align:center;
-    margin-bottom:20px;
-}
-
-input{
-    width:100%;
-    padding:14px;
-    border-radius:50px;
-    border:1px solid #ccc;
-    margin:10px 0;
-    outline:none;
-}
-
-.submit{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:50px;
-    background:linear-gradient(to right,#6a11cb,#2575fc);
-    color:#fff;
-    font-size:16px;
-    cursor:pointer;
-    margin-top:15px;
-}
-
-.submit:hover{
-    opacity:0.9;
-}
-
-.error{
-    text-align:center;
-    color:red;
-    margin-bottom:10px;
-}
-
-/* Mobile */
-@media(max-width:768px){
-    .container{
-        flex-direction:column;
-    }
-    .left{
-        height:250px;
-    }
-}
-</style>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
+<body class="bg-gray-100">
 
-<body>
+<!-- NAVBAR -->
+<nav class="bg-white shadow-md fixed top-0 left-0 w-full z-50">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex items-center h-16">
+      <img src="assets/images/Careerniti_logo.png" alt="Careerniti Logo" class="h-10 w-auto">
+      <div class="flex-1"></div>
+      <div class="hidden md:flex items-center gap-6">
+        <a href="index.php" class="text-gray-700 hover:text-orange-500 font-medium">Home</a>
+        <a href="about.php" class="text-gray-700 hover:text-orange-500 font-medium">About Us</a>
+        <a href="services.php" class="text-gray-700 hover:text-orange-500 font-medium">Services</a>
+        <a href="contact.php" class="text-gray-700 hover:text-orange-500 font-medium">Contact Us</a>
+        <a href="register.php" class="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-5 py-2 rounded-md hover:opacity-90 transition">Register</a>
+        <a href="login.php" class="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-5 py-2 rounded-md hover:opacity-90 transition">Login</a>
+      </div>
+      <button id="menu-btn" class="md:hidden text-2xl text-gray-700 ml-2">☰</button>
+    </div>
+  </div>
 
-<div class="container">
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t shadow-lg">
+    <div class="px-4 py-4 space-y-3">
+      <a href="index.php" class="block py-2 hover:bg-gray-50">Home</a>
+      <a href="about.php" class="block py-2 hover:bg-gray-50">About Us</a>
+      <a href="services.php" class="block py-2 hover:bg-gray-50">Services</a>
+      <a href="contact.php" class="block py-2 hover:bg-gray-50">Contact Us</a>
+      <a href="register.php" class="block text-center border border-orange-500 text-orange-500 px-6 py-2 rounded-md hover:bg-orange-500 hover:text-white transition">Register</a>
+      <a href="login.php" class="block text-center bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-2 rounded-md hover:opacity-90 transition">Login</a>
+    </div>
+  </div>
+</nav>
 
-    <!-- LOGIN FIRST -->
-    <div class="right">
-        <div class="login-card">
+<!-- SPACE FOR NAVBAR -->
+<div class="h-16"></div>
 
-            <div class="toggle">
-                <button class="active" id="studentBtn">Student</button>
-                <button id="teacherBtn">Teacher</button>
-            </div>
+<!-- LOGIN FORM -->
+<div class="flex justify-center items-center min-h-screen px-4">
+  <div class="bg-white shadow-lg rounded-xl overflow-hidden flex flex-col md:flex-row max-w-4xl w-full">
 
-            <h2>LOGIN</h2>
+    <!-- LEFT FORM -->
+    <div class="w-full md:w-1/2 p-8 md:p-10">
+      <h2 class="text-3xl font-bold text-center mb-6">Login to Careerniti</h2>
 
-            <?php if(isset($error)) echo "<div class='error'>$error</div>"; ?>
+      <?php if($error): ?>
+        <div class="bg-red-100 text-red-700 text-center py-2 mb-4 rounded"><?= $error ?></div>
+      <?php endif; ?>
 
-            <form method="POST">
-                <input type="text" name="username" id="username" placeholder="Username" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <button class="submit">Log In</button>
-            </form>
-
+      <form method="POST" class="space-y-5">
+        <div>
+          <label class="block text-gray-700 mb-2">Username</label>
+          <input type="text" name="username" placeholder="Enter your username" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none"/>
         </div>
+        <div>
+          <label class="block text-gray-700 mb-2">Password</label>
+          <input type="password" name="password" placeholder="Enter your password" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none"/>
+        </div>
+
+        <button type="submit" class="w-full py-3 bg-gradient-to-r from-orange-500 to-pink-500 text-white font-semibold rounded-lg hover:opacity-90 transition">Login</button>
+      </form>
+
+      <!-- Login with Google -->
+      <button class="w-full mt-4 py-3 border border-gray-300 flex items-center justify-center rounded-lg hover:bg-gray-100 transition">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" class="h-6 w-6 mr-2" alt="Google Logo">
+        Login with Google
+      </button>
+
+      <p class="text-center mt-4 text-gray-500">Don't have an account? <a href="register.php" class="text-orange-500 font-semibold">Register</a></p>
     </div>
 
-    <!-- IMAGE AFTER LOGIN -->
-    <div class="left"></div>
+    <!-- RIGHT IMAGE -->
+    <div class="w-full md:w-1/2 bg-cover bg-center h-64 md:h-auto" style="background-image:url('assets/images/login1.png');"></div>
 
+  </div>
 </div>
 
+<!-- MOBILE MENU SCRIPT -->
 <script>
-const studentBtn = document.getElementById("studentBtn");
-const teacherBtn = document.getElementById("teacherBtn");
-const username = document.getElementById("username");
-
-studentBtn.onclick = () => {
-    studentBtn.classList.add("active");
-    teacherBtn.classList.remove("active");
-    username.value = "student";
-}
-
-teacherBtn.onclick = () => {
-    teacherBtn.classList.add("active");
-    studentBtn.classList.remove("active");
-    username.value = "teacher";
-}
+const btn = document.getElementById("menu-btn");
+const menu = document.getElementById("mobile-menu");
+btn.addEventListener("click", () => {
+  menu.classList.toggle("hidden");
+});
 </script>
 
 </body>
