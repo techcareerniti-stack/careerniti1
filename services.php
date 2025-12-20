@@ -182,5 +182,7 @@ document.getElementById("search").addEventListener("input", e => {
   });
 });
 </script>
+<?php include("./includes/footer.php"); ?>
+
 </body>
 </html>
