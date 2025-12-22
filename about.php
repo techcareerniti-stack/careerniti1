@@ -11,12 +11,12 @@ if (session_status() === PHP_SESSION_NONE) {
     <title>About Us | CareerNiTi</title>
 
     <!-- Tailwind CSS -->
-    <link href="./assets/css/output.css" rel="stylesheet">
+    <link href="../assets/css/output.css" rel="stylesheet">
 </head>
 
 <body>
 
-<?php include("./includes/navbar.php"); ?>
+<?php include("../includes/usernavbar.php"); ?>
 
 <!-- Header -->
 
@@ -62,7 +62,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <!-- Image BELOW text on mobile -->
     <div class="order-2 md:order-2">
         <img 
-            src="./assets/images/vision.jpeg" 
+            src="../assets/images/vision.jpeg" 
             alt="Our Vision" 
             class="w-full h-auto rounded-lg object-cover"
         >
@@ -75,7 +75,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <div class="grid md:grid-cols-2 gap-8 items-center bg-white rounded-xl p-6 md:p-10">
         <div class="order-2 md:order-1">
             <img 
-                src="./assets/images/misssion.jpg" 
+                src="../assets/images/misssion.jpg" 
                 alt="Our Mission" 
                 class="w-full h-auto rounded-lg object-cover"
             >
@@ -90,7 +90,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 </section>
 
-<?php include("./includes/footer.php"); ?>
+<?php include("../includes/footer.php"); ?>
 
 </body>
 </html>
