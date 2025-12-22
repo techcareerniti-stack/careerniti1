@@ -6,6 +6,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
     // You can add your login validation here
+    //🔹 Demo validation (replace with DB later)
+    if ($username === 'student' && $password === '1234') {
+
+        // Store session
+        $_SESSION['username'] = $username;
+        $_SESSION['role'] = 'student';
+
+        // ✅ Redirect to student folder
+        header("Location: student/index.php");
+        exit();
+    } else {
+        $error = "Invalid username or password";
+    }
 }
 ?>
 <!DOCTYPE html>
