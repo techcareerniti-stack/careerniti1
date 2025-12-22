@@ -6,10 +6,10 @@
       <!-- LOGO -->
       <div class="flex items-center">
         <img
-          src="assets/images/Careerniti_logo.png"
-          alt="Careerniti Logo"
-          class="h-10 w-auto"
-        />
+  src="/career/assets/images/Careerniti_logo.png"
+  alt="Careerniti Logo"
+  class="h-10 w-auto object-contain"
+/>
       </div>
 
       <!-- SPACE -->
@@ -18,27 +18,14 @@
       <!-- DESKTOP MENU -->
       <div class="hidden md:flex items-center space-x-8">
         <a href="index.php" class="text-gray-700 hover:text-orange-500 font-medium no-underline">Home</a>
+        <a href="career.php" class="text-gray-700 hover:text-orange-500 font-medium no-underline">Career </a>
+        <a href="exam.php" class="text-gray-700 hover:text-orange-500 font-medium no-underline">Exam</a>
+        <a href="about.php" class="text-gray-700 hover:text-orange-500 font-medium no-underline">Admission</a>
+        <a href="about.php" class="text-gray-700 hover:text-orange-500 font-medium no-underline">Notification</a>
         <a href="about.php" class="text-gray-700 hover:text-orange-500 font-medium no-underline">About Us</a>
-        <a href="services.php" class="text-gray-700 hover:text-orange-500 font-medium no-underline">Services</a>
         <a href="contact.php" class="text-gray-700 hover:text-orange-500 font-medium no-underline">Contact Us</a>
 
-        <!-- REGISTER -->
-        <a
-          href="register.php"
-          class="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-5 py-2 rounded-md hover:opacity-90 transition"
         
-        >
-          Register
-        </a>
-
-        <!-- LOGIN -->
-        <a
-          href="login.php"
-          class="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-1 rounded-md
-                 hover:opacity-90 transition duration-200"
-        >
-          Login
-        </a>
       </div>
 
       <!-- MOBILE BUTTON -->
