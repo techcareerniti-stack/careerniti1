@@ -28,41 +28,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Careerniti Login</title>
 
-<!-- Tailwind CSS -->
-<script src="https://cdn.tailwindcss.com"></script>
+<!-- ✅ Tailwind CSS -->
+<link rel="stylesheet" href="/career/assets/css/output.css">
+
 </head>
 <body class="bg-gray-100">
 
-<!-- NAVBAR -->
-<nav class="bg-white shadow-md fixed top-0 left-0 w-full z-50">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="flex items-center h-16">
-      <img src="assets/images/Careerniti_logo.png" alt="Careerniti Logo" class="h-10 w-auto">
-      <div class="flex-1"></div>
-      <div class="hidden md:flex items-center gap-6">
-        <a href="index.php" class="text-gray-700 hover:text-orange-500 font-medium">Home</a>
-        <a href="about.php" class="text-gray-700 hover:text-orange-500 font-medium">About Us</a>
-        <a href="services.php" class="text-gray-700 hover:text-orange-500 font-medium">Services</a>
-        <a href="contact.php" class="text-gray-700 hover:text-orange-500 font-medium">Contact Us</a>
-        <a href="register.php" class="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-5 py-2 rounded-md hover:opacity-90 transition">Register</a>
-        <a href="login.php" class="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-5 py-2 rounded-md hover:opacity-90 transition">Login</a>
-      </div>
-      <button id="menu-btn" class="md:hidden text-2xl text-gray-700 ml-2">☰</button>
-    </div>
-  </div>
+<!-- ✅ NAVBAR INCLUDE (CORRECT PATH) -->
+<?php
+include $_SERVER['DOCUMENT_ROOT'] . '/career/includes/navbar.php';
+?>
 
-  <!-- MOBILE MENU -->
-  <div id="mobile-menu" class="hidden md:hidden bg-white border-t shadow-lg">
-    <div class="px-4 py-4 space-y-3">
-      <a href="index.php" class="block py-2 hover:bg-gray-50">Home</a>
-      <a href="about.php" class="block py-2 hover:bg-gray-50">About Us</a>
-      <a href="services.php" class="block py-2 hover:bg-gray-50">Services</a>
-      <a href="contact.php" class="block py-2 hover:bg-gray-50">Contact Us</a>
-      <a href="register.php" class="block text-center border border-orange-500 text-orange-500 px-6 py-2 rounded-md hover:bg-orange-500 hover:text-white transition">Register</a>
-      <a href="login.php" class="block text-center bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-2 rounded-md hover:opacity-90 transition">Login</a>
-    </div>
-  </div>
-</nav>
+  
 
 <!-- SPACE FOR NAVBAR -->
 <div class="h-16"></div>
@@ -102,11 +79,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <!-- RIGHT IMAGE -->
-    <div class="w-full md:w-1/2 bg-cover bg-center h-64 md:h-auto" style="background-image:url('assets/images/login1.png');"></div>
+    <div class="w-full md:w-1/2 bg-cover bg-center h-60 md:h-auto" style="background-image:url('assets/images/login1.png');"></div>
 
   </div>
 </div>
-
+<?php include 'includes/footer.php'; ?>
 <!-- MOBILE MENU SCRIPT -->
 <script>
 const btn = document.getElementById("menu-btn");
