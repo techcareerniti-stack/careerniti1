@@ -38,7 +38,17 @@ $examCategories = [
     [
         "title"=>"Pure Science",
         "image"=>"./assets/images/PureSc.jpeg",
-        "type"=>"UG"
+        "type"=>"UG",
+        "description"=>"Engineering entrance exams for undergraduate programs",
+        "sub_exams"=>[
+             ["title"=>"IISER","image"=>"./assets/images/IISER.jpeg"],
+            ["title"=>"NISER","image"=>"./assets/images/NISER.jpeg"],
+            ["title"=>"IISC","image"=>"./assets/images/IISC.jpeg"],
+            ["title"=>"CMI","image"=>"./assets/images/CMI.jpeg"],
+            ["title"=>"IIST","image"=>"./assets/images/IIST.jpeg"],
+            ["title"=>"IBB","image"=>"./assets/images/IBB.jpeg"],
+            ["title"=>"ISI","image"=>"./assets/images/ISI.jpeg"],
+        ]
     ],
 
     /* PG EXAMS */
