@@ -9,73 +9,73 @@ $examCategories = [
     /* UG EXAMS */
     [
         "title"=>"Medical", 
-        "image"=>"./assets/images/med.png",
+        "image"=>"../assets/images/med.png",
         "type"=>"UG",
         "description"=>"Medical entrance exams for undergraduate programs",
         "sub_exams"=>[
-            ["title"=>"NEET UG","image"=>"./assets/images/NEET.jpeg"],
-            ["title"=>"AIIMS","image"=>"./assets/images/AIMAP.jpeg"]
+            ["title"=>"NEET UG","image"=>"../assets/images/NEET.jpeg"],
+            ["title"=>"AIIMS","image"=>"../assets/images/AIMAP.jpeg"]
         ]
     ],
 
     [
         "title"=>"Engineering",
-        "image"=>"./assets/images/eng.png",
+        "image"=>"../assets/images/eng.png",
         "type"=>"UG",
         "description"=>"Engineering entrance exams for undergraduate programs",
         "sub_exams"=>[
-             ["title"=>"BVP CET","image"=>"./assets/images/BVPCET.jpeg"],
-            ["title"=>"COMEDK","image"=>"./assets/images/COMEDK.jpeg"],
-            ["title"=>"CUET","image"=>"./assets/images/CUET.jpeg"],
-            ["title"=>"JEE ADVANCED","image"=>"./assets/images/JEEAD.jpeg"],
-            ["title"=>"JEE MAINS","image"=>"./assets/images/JEEMAIN.jpeg"],
-            ["title"=>"MANIPAL","image"=>"./assets/images/MANIPAL.jpeg"],
-            ["title"=>"MHT CET","image"=>"./assets/images/MHTCET.jpeg"],
-            ["title"=>"VITEEE","image"=>"./assets/images/VIT.jpeg"]
+             ["title"=>"BVP CET","image"=>"../assets/images/BVPCET.jpeg"],
+            ["title"=>"COMEDK","image"=>"../assets/images/COMEDK.jpeg"],
+            ["title"=>"CUET","image"=>"../assets/images/CUET.jpeg"],
+            ["title"=>"JEE ADVANCED","image"=>"../assets/images/JEEAD.jpeg"],
+            ["title"=>"JEE MAINS","image"=>"../assets/images/JEEMAIN.jpeg"],
+            ["title"=>"MANIPAL","image"=>"../assets/images/MANIPAL.jpeg"],
+            ["title"=>"MHT CET","image"=>"../assets/images/MHTCET.jpeg"],
+            ["title"=>"VITEEE","image"=>"../assets/images/VIT.jpeg"]
         ]
     ],
 
     [
         "title"=>"Pure Science",
-        "image"=>"./assets/images/PureSc.jpeg",
+        "image"=>"../assets/images/PureSc.jpeg",
         "type"=>"UG",
         "description"=>"Engineering entrance exams for undergraduate programs",
         "sub_exams"=>[
-             ["title"=>"IISER","image"=>"./assets/images/IISER.jpeg"],
-            ["title"=>"NISER","image"=>"./assets/images/NISER.jpeg"],
-            ["title"=>"IISC","image"=>"./assets/images/IISC.jpeg"],
-            ["title"=>"CMI","image"=>"./assets/images/CMI.jpeg"],
-            ["title"=>"IIST","image"=>"./assets/images/IIST.jpeg"],
-            ["title"=>"IBB","image"=>"./assets/images/IBB.jpeg"],
-            ["title"=>"ISI","image"=>"./assets/images/ISI.jpeg"],
+             ["title"=>"IISER","image"=>"../assets/images/IISER.jpeg"],
+            ["title"=>"NISER","image"=>"../assets/images/NISER.jpeg"],
+            ["title"=>"IISC","image"=>"../assets/images/IISC.jpeg"],
+            ["title"=>"CMI","image"=>"../assets/images/CMI.jpeg"],
+            ["title"=>"IIST","image"=>"../assets/images/IIST.jpeg"],
+            ["title"=>"IBB","image"=>"../assets/images/IBB.jpeg"],
+            ["title"=>"ISI","image"=>"../assets/images/ISI.jpeg"],
         ]
     ],
 
     /* PG EXAMS */
     [
         "title"=>"Medical",
-        "image"=>"./assets/images/med.png",
+        "image"=>"../assets/images/med.png",
         "type"=>"PG",
         "description"=>"Postgraduate medical entrance exams",
         "sub_exams"=>[
-            ["title"=>"NEET PG","image"=>"./assets/images/NEET.jpeg"]
+            ["title"=>"NEET PG","image"=>"../assets/images/NEET.jpeg"]
         ]
     ],
 
     [
         "title"=>"Engineering",
-        "image"=>"./assets/images/eng.png",
+        "image"=>"../assets/images/eng.png",
         "type"=>"PG",
         "description"=>"Postgraduate engineering entrance exams",
         "sub_exams"=>[
-            ["title"=>"GATE","image"=>"./assets/images/GATE.jpeg"],
-            ["title"=>"GRE","image"=>"./assets/images/JRE.jpeg"]
+            ["title"=>"GATE","image"=>"../assets/images/GATE.jpeg"],
+            ["title"=>"GRE","image"=>"../assets/images/JRE.jpeg"]
         ]
     ],
 
     [
         "title"=>"Pure Science",
-        "image"=>"./assets/images/PureSc.jpeg",
+        "image"=>"../assets/images/PureSc.jpeg",
         "type"=>"PG"
     ]
 ];
@@ -87,12 +87,13 @@ $examCategories = [
 <meta charset="UTF-8">
 <title>Exam Categories</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Tailwind CSS -->
-    <link href="./assets/css/output.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
 </head>
+<!-- Tailwind CSS -->
+    <link href="../assets/css/output.css" rel="stylesheet">
 <body class="bg-gray-50">
 
-<?php include("./includes/navbar.php"); ?>
+<?php include("../includes/usernavbar.php"); ?>
 
 <!-- HEADER -->
 <div class="relative text-center py-8 bg-gradient-to-r from-orange-400 to-pink-600 text-white">
@@ -173,6 +174,6 @@ function openSection(exam){
 filterExams('UG');
 </script>
 
-<?php include("./includes/footer.php"); ?>
+<?php include("../includes/footer.php"); ?>
 </body>
 </html>

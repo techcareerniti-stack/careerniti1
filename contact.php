@@ -4,16 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CareerNiti - Contact Us</title>
-    <link rel="stylesheet" href="assets/css/output.css">
-    <link rel="stylesheet" href="assets/css/index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" sizes="16x16" type="image/png" href="assets/images/title-logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">  
-</head>
-
-<!-- ✅ Tailwind CSS -->
-<link rel="stylesheet" href="/career/assets/css/output.css">
-
+    <link rel="stylesheet" href="../assets/css/output.css">
+   </head>
 <body class="font-sans">
     <?php include '../includes/usernavbar.php'; ?>
     
@@ -41,7 +33,7 @@
     
     <!-- Header -->
     <div class="relative text-center py-8 bg-gradient-to-r from-orange-400 to-pink-600 text-white">
-        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold px-4">Contacts Us</h1>
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold px-4">Contact Us</h1>
     </div>
     
     <!-- Main Content -->
@@ -181,12 +173,13 @@
                             <h3 class="text-base sm:text-lg font-bold text-gray-800">Satara</h3>
                             <p class="text-gray-500 text-xs sm:text-sm mt-1 sm:mt-2">Satara</p>
                         </div>
-                    </div>
-                    <a href="#" 
-                       target="_blank" rel="noopener noreferrer" 
-                       class="mt-3 sm:mt-4 px-4 py-2 bg-[#ec8623] text-white rounded-lg hover:bg-[#f79739] transition duration-300 flex items-center justify-center text-sm sm:text-base">
+                        </div>
+                    <a href="https://maps.app.goo.gl/mqkcdHXGzWYQrnEh9?g_st=ipc" target="_blank" rel="noopener noreferrer" class="mt-3 sm:mt-4 px-4 py-2 bg-[#ec8623] text-white rounded-lg hover:bg-[#f79739] transition duration-300 flex items-center justify-center text-sm sm:text-base">
                         <i class="fas fa-map-marker-alt mr-2"></i> View Map
                     </a>
+                </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>
