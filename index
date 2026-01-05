@@ -7,11 +7,299 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/png" href="./assets/images/title-logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">  
-    <!-- Tailwind CSS -->
     <link href="./assets/css/output.css" rel="stylesheet">
-    <!-- Tailwind CSS -->
-    <link href="./assets/css/index.css" rel="stylesheet">
-    
+    <style>
+        #hoverModal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border: 1px solid #e5e7eb;
+            min-width: 300px;
+            max-width: 350px;
+            animation: fadeIn 0.2s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-arrow {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            width: 16px;
+            height: 16px;
+            background: white;
+            border-left: 1px solid #e5e7eb;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .hover-modal-content {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .hover-modal-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .hover-modal-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        
+        .hover-modal-content::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+        
+        #mobileModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10000;
+            background: rgba(0,0,0,0.5);
+        }
+        
+        .mobile-modal-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 20px 20px 0 0;
+            max-height: 80vh;
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        
+        .modal-tab {
+            transition: all 0.2s ease;
+        }
+        
+        .modal-tab.active {
+            color: #ea580c;
+            border-bottom: 2px solid #ea580c;
+        }
+        
+        .modal-item {
+            transition: all 0.2s ease;
+        }
+        
+        .modal-item:hover {
+            background-color: #fff7ed;
+            border-color: #fed7aa;
+        }
+        
+        /* Infinite scroll styles */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        
+        .marquee-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 30s linear infinite;
+        }
+        
+        .marquee-content:hover {
+            animation-play-state: paused;
+        }
+        
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        /* Partners marquee */
+        .partners-marquee-container {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .partners-marquee-content {
+            display: flex;
+            animation: partnersMarquee 25s linear infinite;
+        }
+        
+        .partners-marquee-content:hover {
+            animation-play-state: paused;
+        }
+        
+        @keyframes partnersMarquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        /* Testimonials infinite scroll */
+        @keyframes infiniteScroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-320px * 7));
+            }
+        }
+        
+        .testimonials-scroll-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .animate-infinite-scroll {
+            display: flex;
+            animation: infiniteScroll 120s linear infinite;
+            width: max-content;
+        }
+        
+        .animate-infinite-scroll:hover {
+            animation-play-state: paused;
+        }
+        
+        .gradient-overlay-left {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 60px;
+            background: linear-gradient(to right, #f9fafb, transparent);
+            z-index: 10;
+            pointer-events: none;
+        }
+        
+        .gradient-overlay-right {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 60px;
+            background: linear-gradient(to left, #f9fafb, transparent);
+            z-index: 10;
+            pointer-events: none;
+        }
+        
+        /* Remove side margins/padding for specific sections */
+        .testimonials-full-width {
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .associations-full-width {
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            transform: translateX(-50%);
+        }
+        
+        @media (max-width: 768px) {
+            #hoverModal {
+                display: none !important;
+            }
+            
+            .marquee-content {
+                animation: marquee 20s linear infinite;
+            }
+            
+            .partners-marquee-content {
+                animation: partnersMarquee 20s linear infinite;
+            }
+            
+            @keyframes infiniteScroll {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(calc(-288px * 7));
+                }
+            }
+            
+            .animate-infinite-scroll {
+                animation-duration: 140s;
+            }
+            
+            .gradient-overlay-left,
+            .gradient-overlay-right {
+                width: 40px;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            @keyframes infiniteScroll {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(calc(-256px * 7));
+                }
+            }
+            
+            .animate-infinite-scroll {
+                animation-duration: 160s;
+            }
+            
+            .gradient-overlay-left,
+            .gradient-overlay-right {
+                width: 30px;
+            }
+        }
+        
+        /* Poppins font */
+        .poppins-regular {
+            font-family: 'Poppins', sans-serif;
+        }
+        @keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scroll-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-scroll {
+  animation: scroll-left 20s linear infinite;
+}
+
+.animate-scroll-slow {
+  animation: scroll-left 30s linear infinite;
+}
+
+.animate-scroll-reverse {
+  animation: scroll-right 25s linear infinite;
+}
+
+    </style>
 </head>
 <body>
 <?php include './includes/navbar.php'; ?> 
@@ -251,273 +539,844 @@
         </div>
     </div>
 
-
-    <!--top to  explore-->
-     <div class="text-center mb-8 md:mb-12">
-         <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3">Top To Explore</h2>
+    <!-- Explore Categories Section -->
+    <section class="max-w-7xl mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-8">Explore Categories</h1>
+        
+        <!-- MOBILE VIEW (Single cards) -->
+        <div class="block md:hidden relative min-h-[400px]">
+            <div class="mobile-slider-container overflow-hidden h-[400px]">
+                <div class="mobile-slider flex transition-transform duration-500 ease-in-out">
+                    <!-- Cards will be inserted here by JavaScript -->
+                </div>
             </div>
-<!-- TOGGLE -->
+            
+            <!-- Mobile Navigation Arrows -->
+            <button class="mobile-prev absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-gray-50">
+                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </button>
+            <button class="mobile-next absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-gray-50">
+                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </button>
+            
+            <!-- Mobile Indicators -->
+            <div class="mobile-indicators flex justify-center gap-2 mt-6">
+                <!-- Indicators will be inserted here by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- DESKTOP VIEW (Three columns, each with ONE image at a time) -->
+        <div class="hidden md:flex gap-6 justify-center">
+            <!-- CAREER Column -->
+            <div class="w-80 bg-white rounded-xl shadow p-4 overflow-hidden">
+                <h2 class="text-lg font-semibold mb-4 text-center">Career</h2>
+                <div class="relative">
+                    <!-- Left Arrow -->
+                    <button class="career-prev absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-gray-50">
+                        <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Images Container - ONE image at a time -->
+                    <div class="overflow-hidden h-48">
+                        <div class="career-slider flex transition-transform duration-300 ease-in-out">
+                            <!-- Slide 1: Business -->
+                            <div class="min-w-full text-center px-4">
+                                <img src="./assets/images/AACCC.jpeg" class="h-32 mx-auto mb-3">
+                                <p class="text-lg font-medium">Business</p>
+                                <p class="text-sm text-gray-600 mt-1">Lead the corporate world</p>
+                            </div>
+                            <!-- Slide 2: Medical -->
+                            <div class="min-w-full text-center px-4">
+                                <img src="./assets/images/AACCC.jpeg" class="h-32 mx-auto mb-3">
+                                <p class="text-lg font-medium">Medical</p>
+                                <p class="text-sm text-gray-600 mt-1">Serve humanity with care</p>
+                            </div>
+                            <!-- Slide 3: Engineering -->
+                            <div class="min-w-full text-center px-4">
+                                <img src="./assets/images/AACCC.jpeg" class="h-32 mx-auto mb-3">
+                                <p class="text-lg font-medium">Engineering</p>
+                                <p class="text-sm text-gray-600 mt-1">Build innovative solutions</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Arrow -->
+                    <button class="career-next absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-gray-50">
+                        <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Dots Indicator -->
+                <div class="flex justify-center gap-2 mt-4">
+                    <div class="career-dot w-2 h-2 rounded-full bg-blue-500 cursor-pointer" data-slide="0"></div>
+                    <div class="career-dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer" data-slide="1"></div>
+                    <div class="career-dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer" data-slide="2"></div>
+                </div>
+            </div>
+            
+            <!-- EXAM Column -->
+            <div class="w-80 bg-white rounded-xl shadow p-4 overflow-hidden">
+                <h2 class="text-lg font-semibold mb-4 text-center">Exam</h2>
+                <div class="relative">
+                    <!-- Left Arrow -->
+                    <button class="exam-prev absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-gray-50">
+                        <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Images Container - ONE image at a time -->
+                    <div class="overflow-hidden h-48">
+                        <div class="exam-slider flex transition-transform duration-300 ease-in-out">
+                            <!-- Slide 1: UPSC -->
+                            <div class="min-w-full text-center px-4">
+                                <img src="assets/images/aptitudeTest.png" class="h-32 mx-auto mb-3">
+                                <p class="text-lg font-medium">UPSC</p>
+                                <p class="text-sm text-gray-600 mt-1">Civil services examination</p>
+                            </div>
+                            <!-- Slide 2: NEET -->
+                            <div class="min-w-full text-center px-4">
+                                <img src="assets/images/aptitudeTest.png" class="h-32 mx-auto mb-3">
+                                <p class="text-lg font-medium">NEET</p>
+                                <p class="text-sm text-gray-600 mt-1">Medical entrance exam</p>
+                            </div>
+                            <!-- Slide 3: JEE -->
+                            <div class="min-w-full text-center px-4">
+                                <img src="assets/images/aptitudeTest.png" class="h-32 mx-auto mb-3">
+                                <p class="text-lg font-medium">JEE</p>
+                                <p class="text-sm text-gray-600 mt-1">Engineering entrance exam</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Arrow -->
+                    <button class="exam-next absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-gray-50">
+                        <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Dots Indicator -->
+                <div class="flex justify-center gap-2 mt-4">
+                    <div class="exam-dot w-2 h-2 rounded-full bg-blue-500 cursor-pointer" data-slide="0"></div>
+                    <div class="exam-dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer" data-slide="1"></div>
+                    <div class="exam-dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer" data-slide="2"></div>
+                </div>
+            </div>
+            
+            <!-- ADMISSION Column -->
+            <div class="w-80 bg-white rounded-xl shadow p-4 overflow-hidden">
+                <h2 class="text-lg font-semibold mb-4 text-center">Admission</h2>
+                <div class="relative">
+                    <!-- Left Arrow -->
+                    <button class="admission-prev absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-gray-50">
+                        <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Images Container - ONE image at a time -->
+                    <div class="overflow-hidden h-48">
+                        <div class="admission-slider flex transition-transform duration-300 ease-in-out">
+                            <!-- Slide 1: Scholarships -->
+                            <div class="min-w-full text-center px-4">
+                                <img src="assets/images/admissionImg.jpeg" class="h-32 mx-auto mb-3">
+                                <p class="text-lg font-medium">Scholarships</p>
+                                <p class="text-sm text-gray-600 mt-1">Financial aid opportunities</p>
+                            </div>
+                            <!-- Slide 2: Universities -->
+                            <div class="min-w-full text-center px-4">
+                                <img src="assets/images/admissionImg.jpeg" class="h-32 mx-auto mb-3">
+                                <p class="text-lg font-medium">Universities</p>
+                                <p class="text-sm text-gray-600 mt-1">Prestigious universities</p>
+                            </div>
+                            <!-- Slide 3: Colleges -->
+                            <div class="min-w-full text-center px-4">
+                                <img src="assets/images/admissionImg.jpeg" class="h-32 mx-auto mb-3">
+                                <p class="text-lg font-medium">Colleges</p>
+                                <p class="text-sm text-gray-600 mt-1">Top institutions worldwide</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Arrow -->
+                    <button class="admission-next absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-gray-50">
+                        <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Dots Indicator -->
+                <div class="flex justify-center gap-2 mt-4">
+                    <div class="admission-dot w-2 h-2 rounded-full bg-blue-500 cursor-pointer" data-slide="0"></div>
+                    <div class="admission-dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer" data-slide="1"></div>
+                    <div class="admission-dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer" data-slide="2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<script>
+// Mobile cards data
+const mobileCards = [
+    { category: 'Career', title: 'Business', desc: 'Lead the corporate world', img: './assets/images/AACCC.jpeg' },
+    { category: 'Exam', title: 'UPSC', desc: 'Civil services examination', img: 'assets/images/aptitudeTest.png' },
+    { category: 'Admission', title: 'Scholarships', desc: 'Financial aid opportunities', img: 'assets/images/admissionImg.jpeg' },
+    { category: 'Career', title: 'Medical', desc: 'Serve humanity with care', img: './assets/images/AACCC.jpeg' },
+    { category: 'Exam', title: 'NEET', desc: 'Medical entrance exam', img: 'assets/images/aptitudeTest.png' },
+    { category: 'Admission', title: 'Universities', desc: 'Prestigious universities', img: 'assets/images/admissionImg.jpeg' },
+    { category: 'Career', title: 'Engineering', desc: 'Build innovative solutions', img: './assets/images/AACCC.jpeg' },
+    { category: 'Exam', title: 'JEE', desc: 'Engineering entrance exam', img: 'assets/images/aptitudeTest.png' },
+    { category: 'Admission', title: 'Colleges', desc: 'Top institutions worldwide', img: 'assets/images/admissionImg.jpeg' }
+];
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize mobile slider if on mobile
+    if (window.innerWidth < 768) {
+        initMobileSlider();
+    } else {
+        initDesktopSliders();
+    }
+    
+    // Reinitialize on window resize
+    window.addEventListener('resize', function() {
+        // Clear any existing intervals
+        if (window.mobileInterval) clearInterval(window.mobileInterval);
+        if (window.careerInterval) clearInterval(window.careerInterval);
+        if (window.examInterval) clearInterval(window.examInterval);
+        if (window.admissionInterval) clearInterval(window.admissionInterval);
+        
+        // Reinitialize based on screen size
+        if (window.innerWidth < 768) {
+            initMobileSlider();
+        } else {
+            initDesktopSliders();
+        }
+    });
+});
+
+function initMobileSlider() {
+    const sliderContainer = document.querySelector('.mobile-slider');
+    const indicatorsContainer = document.querySelector('.mobile-indicators');
+    
+    if (!sliderContainer) return;
+    
+    // Clear existing content
+    sliderContainer.innerHTML = '';
+    indicatorsContainer.innerHTML = '';
+    
+    // Create mobile cards
+    mobileCards.forEach((card, index) => {
+        // Create card
+        const cardDiv = document.createElement('div');
+        cardDiv.className = 'min-w-full';
+        cardDiv.innerHTML = `
+            <div class="bg-white rounded-xl shadow p-6 mx-4 h-[350px] flex flex-col items-center justify-center">
+                <h2 class="text-lg font-semibold mb-4 text-center">${card.category}</h2>
+                <img src="${card.img}" class="h-40 mx-auto mb-4" alt="${card.title}">
+                <p class="text-xl font-bold mb-2">${card.title}</p>
+                <p class="text-sm text-gray-600 text-center">${card.desc}</p>
+            </div>
+        `;
+        sliderContainer.appendChild(cardDiv);
+        
+        // Create indicator
+        const indicator = document.createElement('div');
+        indicator.className = `w-2.5 h-2.5 rounded-full ${index === 0 ? 'bg-blue-500' : 'bg-gray-300'} mobile-dot-indicator`;
+        indicator.dataset.index = index;
+        indicatorsContainer.appendChild(indicator);
+    });
+    
+    // Mobile slider logic
+    const mobileSlider = document.querySelector('.mobile-slider');
+    const mobileDots = document.querySelectorAll('.mobile-dot-indicator');
+    const prevBtn = document.querySelector('.mobile-prev');
+    const nextBtn = document.querySelector('.mobile-next');
+    
+    let currentSlide = 0;
+    const totalSlides = mobileCards.length;
+    
+    function updateMobileSlider() {
+        // Move slider horizontally
+        mobileSlider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        
+        // Update dots
+        mobileDots.forEach((dot, index) => {
+            if (index === currentSlide) {
+                dot.classList.remove('bg-gray-300');
+                dot.classList.add('bg-blue-500');
+            } else {
+                dot.classList.remove('bg-blue-500');
+                dot.classList.add('bg-gray-300');
+            }
+        });
+    }
+    
+    // Next button
+    if (nextBtn) {
+        nextBtn.onclick = function() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateMobileSlider();
+        };
+    }
+    
+    // Previous button
+    if (prevBtn) {
+        prevBtn.onclick = function() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateMobileSlider();
+        };
+    }
+    
+    // Auto slide
+    window.mobileInterval = setInterval(() => {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateMobileSlider();
+    }, 5000);
+    
+    // Pause on hover
+    const mobileContainer = document.querySelector('.mobile-slider-container');
+    if (mobileContainer) {
+        mobileContainer.addEventListener('mouseenter', () => {
+            clearInterval(window.mobileInterval);
+        });
+        
+        mobileContainer.addEventListener('mouseleave', () => {
+            window.mobileInterval = setInterval(() => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateMobileSlider();
+            }, 5000);
+        });
+    }
+    
+    // Initialize
+    updateMobileSlider();
+}
+
+function initDesktopSliders() {
+    // Career slider
+    const careerSlider = document.querySelector('.career-slider');
+    const careerDots = document.querySelectorAll('.career-dot');
+    const careerPrev = document.querySelector('.career-prev');
+    const careerNext = document.querySelector('.career-next');
+    
+    let careerCurrent = 0;
+    const careerTotal = 3;
+    
+    function updateCareerSlider() {
+        careerSlider.style.transform = `translateX(-${careerCurrent * 100}%)`;
+        careerDots.forEach((dot, index) => {
+            dot.classList.toggle('bg-blue-500', index === careerCurrent);
+            dot.classList.toggle('bg-gray-300', index !== careerCurrent);
+        });
+    }
+    
+    if (careerNext) careerNext.onclick = () => { careerCurrent = (careerCurrent + 1) % careerTotal; updateCareerSlider(); };
+    if (careerPrev) careerPrev.onclick = () => { careerCurrent = (careerCurrent - 1 + careerTotal) % careerTotal; updateCareerSlider(); };
+    
+    careerDots.forEach(dot => {
+        dot.onclick = () => { careerCurrent = parseInt(dot.dataset.slide); updateCareerSlider(); };
+    });
+    
+    window.careerInterval = setInterval(() => {
+        careerCurrent = (careerCurrent + 1) % careerTotal;
+        updateCareerSlider();
+    }, 5000);
+    
+    const careerContainer = careerSlider.closest('.relative');
+    if (careerContainer) {
+        careerContainer.addEventListener('mouseenter', () => clearInterval(window.careerInterval));
+        careerContainer.addEventListener('mouseleave', () => {
+            window.careerInterval = setInterval(() => {
+                careerCurrent = (careerCurrent + 1) % careerTotal;
+                updateCareerSlider();
+            }, 5000);
+        });
+    }
+    
+    updateCareerSlider();
+    
+    // Exam slider (similar structure)
+    const examSlider = document.querySelector('.exam-slider');
+    const examDots = document.querySelectorAll('.exam-dot');
+    const examPrev = document.querySelector('.exam-prev');
+    const examNext = document.querySelector('.exam-next');
+    
+    let examCurrent = 0;
+    const examTotal = 3;
+    
+    function updateExamSlider() {
+        examSlider.style.transform = `translateX(-${examCurrent * 100}%)`;
+        examDots.forEach((dot, index) => {
+            dot.classList.toggle('bg-blue-500', index === examCurrent);
+            dot.classList.toggle('bg-gray-300', index !== examCurrent);
+        });
+    }
+    
+    if (examNext) examNext.onclick = () => { examCurrent = (examCurrent + 1) % examTotal; updateExamSlider(); };
+    if (examPrev) examPrev.onclick = () => { examCurrent = (examCurrent - 1 + examTotal) % examTotal; updateExamSlider(); };
+    
+    examDots.forEach(dot => {
+        dot.onclick = () => { examCurrent = parseInt(dot.dataset.slide); updateExamSlider(); };
+    });
+    
+    window.examInterval = setInterval(() => {
+        examCurrent = (examCurrent + 1) % examTotal;
+        updateExamSlider();
+    }, 5000);
+    
+    const examContainer = examSlider.closest('.relative');
+    if (examContainer) {
+        examContainer.addEventListener('mouseenter', () => clearInterval(window.examInterval));
+        examContainer.addEventListener('mouseleave', () => {
+            window.examInterval = setInterval(() => {
+                examCurrent = (examCurrent + 1) % examTotal;
+                updateExamSlider();
+            }, 5000);
+        });
+    }
+    
+    updateExamSlider();
+    
+    // Admission slider (similar structure)
+    const admissionSlider = document.querySelector('.admission-slider');
+    const admissionDots = document.querySelectorAll('.admission-dot');
+    const admissionPrev = document.querySelector('.admission-prev');
+    const admissionNext = document.querySelector('.admission-next');
+    
+    let admissionCurrent = 0;
+    const admissionTotal = 3;
+    
+    function updateAdmissionSlider() {
+        admissionSlider.style.transform = `translateX(-${admissionCurrent * 100}%)`;
+        admissionDots.forEach((dot, index) => {
+            dot.classList.toggle('bg-blue-500', index === admissionCurrent);
+            dot.classList.toggle('bg-gray-300', index !== admissionCurrent);
+        });
+    }
+    
+    if (admissionNext) admissionNext.onclick = () => { admissionCurrent = (admissionCurrent + 1) % admissionTotal; updateAdmissionSlider(); };
+    if (admissionPrev) admissionPrev.onclick = () => { admissionCurrent = (admissionCurrent - 1 + admissionTotal) % admissionTotal; updateAdmissionSlider(); };
+    
+    admissionDots.forEach(dot => {
+        dot.onclick = () => { admissionCurrent = parseInt(dot.dataset.slide); updateAdmissionSlider(); };
+    });
+    
+    window.admissionInterval = setInterval(() => {
+        admissionCurrent = (admissionCurrent + 1) % admissionTotal;
+        updateAdmissionSlider();
+    }, 5000);
+    
+    const admissionContainer = admissionSlider.closest('.relative');
+    if (admissionContainer) {
+        admissionContainer.addEventListener('mouseenter', () => clearInterval(window.admissionInterval));
+        admissionContainer.addEventListener('mouseleave', () => {
+            window.admissionInterval = setInterval(() => {
+                admissionCurrent = (admissionCurrent + 1) % admissionTotal;
+                updateAdmissionSlider();
+            }, 5000);
+        });
+    }
+    
+    updateAdmissionSlider();
+}
+</script>
+
+<style>
+/* Hide scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Mobile slider container */
+.mobile-slider-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.mobile-slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.mobile-slider > div {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Desktop sliders - ONE image at a time */
+.career-slider,
+.exam-slider,
+.admission-slider {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+}
+
+.career-slider > div,
+.exam-slider > div,
+.admission-slider > div {
+    min-width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+    .block.md\:hidden {
+        display: block !important;
+    }
+    
+    .hidden.md\:flex {
+        display: none !important;
+    }
+    
+    .min-h-\[400px\] {
+        min-height: 450px;
+    }
+}
+
+@media (min-width: 768px) {
+    .block.md\:hidden {
+        display: none !important;
+    }
+    
+    .hidden.md\:flex {
+        display: flex !important;
+    }
+}
+</style>
+    
+<!-- ================= TOP TO EXPLORE ================= -->
+
+<div class="text-center mb-8 md:mb-12">
+  <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+    Top To Explore
+  </h2>
+  <p class="text-gray-600 text-base max-w-3xl mx-auto">
+    Find the best colleges easily!  
+    Explore colleges either by your <b>Course</b> or by your preferred <b>City</b>.
+  </p>
+</div>
+
+<!-- ================= TOGGLE BUTTONS ================= -->
+
 <div class="flex justify-center gap-6 mb-10">
   <button onclick="showCourseWise()"
-    class="px-8 py-3 rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition">
-    Course Wise
+    class="px-8 py-3 rounded-2xl bg-orange-500 text-white font-semibold">
+    🎓 Explore by Course
   </button>
+
   <button onclick="showCityWise()"
-        class="px-8 py-3 rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition">
- City Wise
+    class="px-8 py-3 rounded-2xl bg-orange-500 text-white font-semibold">
+    📍 Explore by City
   </button>
 </div>
 
 <!-- ================= COURSE WISE ================= -->
-<div id="courseWise"
-  class="max-w-6xl mx-auto bg-white/70 backdrop-blur-xl  rounded-3xl p-8 shadow-2xl">
+
+<div id="courseWise" class="max-w-6xl mx-auto p-8 bg-white rounded-2xl shadow">
+
+  <p class="text-gray-500 mb-6">
+    Step 1: Select your course stream <br>
+    Step 2: Choose your study level (UG / PG) <br>
+    Step 3: Click <b>View Colleges</b> to see matching colleges
+  </p>
 
   <div class="grid md:grid-cols-2 gap-6 mb-8">
-    <select id="courseSelect" onchange="showLevel()"
-      class="p-4 rounded-2xl border border-orange-200 shadow-sm focus:ring-4 focus:ring-orange-300 outline-none">
+    <select id="courseSelect" onchange="enableLevel()"
+      class="p-3 border rounded">
       <option value="">Select Course</option>
       <option value="engineering">Engineering</option>
       <option value="medical">Medical</option>
-      <option value="science">Pure Science</option>
+      <option value="science">Science</option>
       <option value="design">Design</option>
       <option value="defence">Defence</option>
     </select>
 
-    <select id="levelSelect" onchange="showCollegesByCourse()"
-      class="p-4 rounded-2xl border border-orange-200 shadow-sm focus:ring-4 focus:ring-orange-300 outline-none hidden">
+    <select id="levelSelect" disabled
+      class="p-3 border rounded bg-gray-100 cursor-not-allowed">
       <option value="">Select Level</option>
       <option value="ug">UG</option>
       <option value="pg">PG</option>
     </select>
   </div>
 
-  <div id="courseCollegeList" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+  <button onclick="goCourseResult()"
+    class="px-6 py-3 bg-orange-500 text-white rounded-xl font-semibold">
+    View Colleges →
+  </button>
 </div>
 
 <!-- ================= CITY WISE ================= -->
-<div id="cityWise"
-  class="max-w-6xl mx-auto bg-white/70 backdrop-blur-xl 
-   rounded-3xl p-8 shadow-2xl hidden">
+
+<div id="cityWise" class="max-w-6xl mx-auto p-8 bg-white rounded-2xl shadow hidden">
+
+  <p class="text-gray-500 mb-6">
+    Step 1: Select your preferred city <br>
+    Step 2: Choose study level (UG / PG) <br>
+    Step 3: Select course type <br>
+    Step 4: Click <b>View Colleges</b>
+  </p>
 
   <div class="grid md:grid-cols-3 gap-6 mb-8">
-    <select id="citySelect" onchange="showCityLevel()"
-      class="p-4 rounded-2xl border border-orange-200 shadow-sm focus:ring-4 focus:ring-orange-300 outline-none">
+    <select id="citySelect" onchange="enableCityLevel()"
+      class="p-3 border rounded">
       <option value="">Select City</option>
       <option value="sangli">Sangli</option>
       <option value="miraj">Miraj</option>
-      <option value="kolhapur">Kolhapur</option>
       <option value="satara">Satara</option>
       <option value="karad">Karad</option>
       <option value="pune">Pune</option>
       <option value="mumbai">Mumbai</option>
     </select>
 
-    <select id="levelSelectCity" onchange="showCityCourses()"
-      class="p-4 rounded-2xl border border-orange-200 shadow-sm focus:ring-4 focus:ring-orange-300 outline-none hidden">
+    <select id="levelSelectCity" disabled onchange="enableCityCourse()"
+      class="p-3 border rounded bg-gray-100 cursor-not-allowed">
       <option value="">Select Level</option>
       <option value="ug">UG</option>
       <option value="pg">PG</option>
     </select>
 
-    <select id="cityCourseSelect" onchange="showCollegesByCity()"
-      class="p-4 rounded-2xl border border-orange-200 shadow-sm focus:ring-4 focus:ring-orange-300 outline-none hidden">
+    <select id="cityCourseSelect" disabled
+      class="p-3 border rounded bg-gray-100 cursor-not-allowed">
       <option value="">Select Course</option>
+      <option value="engineering">Engineering</option>
+      <option value="medical">Medical</option>
+      <option value="science">Science</option>
+      <option value="design">Design</option>
     </select>
   </div>
 
-  <div id="cityCollegeList" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+  <button onclick="goCityResult()"
+    class="px-6 py-3 bg-orange-500 text-white rounded-xl font-semibold">
+    View Colleges →
+  </button>
 </div>
 
+<!-- ================= JAVASCRIPT ================= -->
+
 <script>
-/* ================= DATA ================= */
-const colleges = [
-
-/* ================= SANGli ================= */
-/* UG */
-{ name:"Walchand College of Engineering", city:"sangli", level:"ug", type:"engineering" },
-{ name:"Government Medical College, Miraj", city:"sangli", level:"ug", type:"medical" },
-{ name:"Willington College", city:"sangli", level:"ug", type:"science" },
-{ name:"Rajarambapu Institute of Technology (Islampur)", city:"sangli", level:"ug", type:"engineering" },
-
-/* PG */
-{ name:"Walchand College of Engineering", city:"sangli", level:"pg", type:"engineering" },
-{ name:"Government Medical College, Miraj", city:"sangli", level:"pg", type:"medical" },
-{ name:"Willington College", city:"sangli", level:"pg", type:"science" },
-
-/* ================= MIRAJ ================= */
-/* UG */
-{ name:"Sanjay Bhokare Group of Institutes", city:"miraj", level:"ug", type:"engineering" },
-{ name:"Government Medical College, Miraj (Campus)", city:"miraj", level:"ug", type:"medical" },
-
-/* PG */
-{ name:"Sanjay Bhokare Group of Institutes", city:"miraj", level:"pg", type:"engineering" },
-{ name:"Government Medical College, Miraj", city:"miraj", level:"pg", type:"medical" },
-
-
-
-/* ================= SATARA ================= */
-/* Engineering */
-{ name:"Government College of Engineering, Satara", city:"satara", level:"ug", type:"engineering" },
-{ name:"Government College of Engineering, Satara", city:"satara", level:"pg", type:"engineering" },
-{ name:"Yashoda Technical Campus", city:"satara", level:"ug", type:"engineering" },
-{ name:"Yashoda Technical Campus", city:"satara", level:"pg", type:"engineering" },
-
-/* Science */
-{ name:"Chhatrapati Shivaji College, Satara", city:"satara", level:"ug", type:"science" },
-{ name:"Chhatrapati Shivaji College, Satara", city:"satara", level:"pg", type:"science" },
-{ name:"Dhananjayrao Gadgil College", city:"satara", level:"ug", type:"science" },
-
-/* ================= KARAD ================= */
-/* Engineering */
-{ name:"Government College of Engineering, Karad", city:"karad", level:"ug", type:"engineering" },
-{ name:"Government College of Engineering, Karad", city:"karad", level:"pg", type:"engineering" },
-
-/* Medical */
-{ name:"Krishna Institute of Medical Sciences (KIMS)", city:"karad", level:"ug", type:"medical" },
-{ name:"Krishna Institute of Medical Sciences (KIMS)", city:"karad", level:"pg", type:"medical" },
-
-/* Science */
-{ name:"Yashwantrao Chavan College of Science", city:"karad", level:"ug", type:"science" },
-{ name:"Yashwantrao Chavan College of Science", city:"karad", level:"pg", type:"science" },
-
-/* ================= PUNE ================= */
-/* Engineering */
-{ name:"College of Engineering Pune (COEP)", city:"pune", level:"ug", type:"engineering" },
-{ name:"College of Engineering Pune (COEP)", city:"pune", level:"pg", type:"engineering" },
-{ name:"MIT World Peace University", city:"pune", level:"ug", type:"engineering" },
-{ name:"MIT World Peace University", city:"pune", level:"pg", type:"engineering" },
-{ name:"Pimpri Chinchwad College of Engineering", city:"pune", level:"ug", type:"engineering" },
-{ name:"Pimpri Chinchwad College of Engineering", city:"pune", level:"pg", type:"engineering" },
-
-/* Medical */
-{ name:"Armed Forces Medical College (AFMC)", city:"pune", level:"ug", type:"medical" },
-{ name:"Armed Forces Medical College (AFMC)", city:"pune", level:"pg", type:"medical" },
-{ name:"BJ Government Medical College", city:"pune", level:"ug", type:"medical" },
-{ name:"BJ Government Medical College", city:"pune", level:"pg", type:"medical" },
-
-/* Science */
-{ name:"Fergusson College", city:"pune", level:"ug", type:"science" },
-{ name:"Fergusson College", city:"pune", level:"pg", type:"science" },
-{ name:"Savitribai Phule Pune University", city:"pune", level:"pg", type:"science" },
-
-/* Defence */
-{ name:"National Defence Academy (NDA)", city:"pune", level:"ug", type:"defence" },
-{ name:"National Defence Academy (NDA)", city:"pune", level:"pg", type:"defence" },
-
-/* ================= MUMBAI ================= */
-/* Engineering */
-{ name:"Indian Institute of Technology Bombay", city:"mumbai", level:"ug", type:"engineering" },
-{ name:"Indian Institute of Technology Bombay", city:"mumbai", level:"pg", type:"engineering" },
-{ name:"Veermata Jijabai Technological Institute (VJTI)", city:"mumbai", level:"ug", type:"engineering" },
-{ name:"Veermata Jijabai Technological Institute (VJTI)", city:"mumbai", level:"pg", type:"engineering" },
-{ name:"Sardar Patel College of Engineering", city:"mumbai", level:"ug", type:"engineering" },
-{ name:"Sardar Patel College of Engineering", city:"mumbai", level:"pg", type:"engineering" },
-
-/* Medical */
-{ name:"Grant Medical College & JJ Hospital", city:"mumbai", level:"ug", type:"medical" },
-{ name:"Grant Medical College & JJ Hospital", city:"mumbai", level:"pg", type:"medical" },
-{ name:"KEM Hospital & Seth GS Medical College", city:"mumbai", level:"ug", type:"medical" },
-{ name:"KEM Hospital & Seth GS Medical College", city:"mumbai", level:"pg", type:"medical" },
-
-/* Science */
-{ name:"St. Xavier’s College", city:"mumbai", level:"ug", type:"science" },
-{ name:"St. Xavier’s College", city:"mumbai", level:"pg", type:"science" },
-{ name:"Ruia College", city:"mumbai", level:"ug", type:"science" },
-{ name:"University of Mumbai", city:"mumbai", level:"pg", type:"science" },
-
-/* Design */
-{ name:"Sir JJ School of Art", city:"mumbai", level:"ug", type:"design" },
-{ name:"Sir JJ School of Art", city:"mumbai", level:"pg", type:"design" }
-
-];
-
-
-
-/* ================= TOGGLE ================= */
-function showCourseWise(){ courseWise.classList.remove("hidden"); cityWise.classList.add("hidden"); }
-function showCityWise(){ cityWise.classList.remove("hidden"); courseWise.classList.add("hidden"); }
-
-/* ================= COURSE WISE ================= */
-function showLevel(){ levelSelect.classList.remove("hidden"); courseCollegeList.innerHTML=""; }
-function showCollegesByCourse(){
-  courseCollegeList.innerHTML="";
-  colleges.filter(x=>x.type===courseSelect.value && x.level===levelSelect.value)
-    .forEach(x=>courseCollegeList.innerHTML+=card(x));
+function showCourseWise() {
+  courseWise.classList.remove("hidden");
+  cityWise.classList.add("hidden");
 }
 
-/* ================= CITY WISE ================= */
-function showCityLevel(){
-  levelSelectCity.classList.remove("hidden");
-  cityCourseSelect.classList.add("hidden");
-  cityCollegeList.innerHTML="";
-}
-function showCityCourses(){
-  cityCourseSelect.classList.remove("hidden");
-  cityCourseSelect.innerHTML='<option value="">Select Course</option>';
-  [...new Set(colleges.filter(x=>x.city===citySelect.value).map(x=>x.type))]
-    .forEach(c=>cityCourseSelect.innerHTML+=`<option value="${c}">${c}</option>`);
-}
-function showCollegesByCity(){
-  cityCollegeList.innerHTML="";
-  colleges.filter(x=>x.city===citySelect.value && x.level===levelSelectCity.value && x.type===cityCourseSelect.value)
-    .forEach(x=>cityCollegeList.innerHTML+=card(x));
+function showCityWise() {
+  cityWise.classList.remove("hidden");
+  courseWise.classList.add("hidden");
 }
 
-/* ================= CARD ================= */
-function card(c){
-  return `
-  <div class="relative bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition">
-    <span class="inline-block text-xs bg-orange-100 text-orange-600 px-4 py-1 rounded-full mb-3">
-      ${c.city.toUpperCase()}
-    </span>
-    <h3 class="text-lg font-bold text-gray-800">${c.name}</h3>
-    <p class="text-sm text-gray-500 mt-1">Level: ${c.level.toUpperCase()}</p>
-    <p class="text-sm text-gray-500">Course: ${c.type}</p>
-    <button class="mt-4 w-full py-2 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold">
-      View Details →
-    </button>
-  </div>`;
+/* COURSE WISE */
+function enableLevel() {
+  levelSelect.disabled = !courseSelect.value;
+  levelSelect.value = "";
+}
+
+function goCourseResult() {
+  if (!courseSelect.value || !levelSelect.value) {
+    alert("Please select Course and Level");
+    return;
+  }
+  window.location.href =
+    `colleges.php?mode=course&course_type=${courseSelect.value}&level=${levelSelect.value}`;
+}
+
+/* CITY WISE */
+function enableCityLevel() {
+  levelSelectCity.disabled = !citySelect.value;
+  levelSelectCity.value = "";
+  cityCourseSelect.disabled = true;
+}
+
+function enableCityCourse() {
+  cityCourseSelect.disabled = !levelSelectCity.value;
+}
+
+function goCityResult() {
+  if (!citySelect.value || !levelSelectCity.value || !cityCourseSelect.value) {
+    alert("Please complete all selections");
+    return;
+  }
+  window.location.href =
+    `colleges.php?mode=city&city=${citySelect.value}&level=${levelSelectCity.value}&course_type=${cityCourseSelect.value}`;
 }
 </script>
 
 
+<!-- Our Services Section - Premium Clean Design -->
+<div class="container mx-auto px-4 py-12">
+    <!-- Section Heading -->
+    <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 mb-3">Our Services</h2>
+        <p class="text-gray-600 text-base sm:text-lg">Comprehensive career solutions tailored for your success</p>
+    </div>
 
-    <!-- Our Services Section -->
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div class="text-center mb-6 md:mb-16">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3">Our Services</h2>
-            <p class="text-gray-600 text-sm sm:text-base"> Comprehensive career solutions tailored for your success</p>
+    <!-- Career Guidance Section (Image LEFT) -->
+    <div class="flex flex-col md:flex-row items-center gap-8 bg-white rounded-2xl border border-gray-200 p-6 md:p-10 mb-10 shadow-md">
+        <!-- Image Column -->
+        <div class="relative w-full md:w-1/2 flex justify-center">
+            <div class="absolute top-4 left-0 bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold text-sm md:text-base px-4 py-1 rounded-tr-lg rounded-br-lg shadow-lg z-10 animate-pulse">
+                Career
+            </div>
+            <img src="assets/images/serviceCareer.png" alt="Career Guidance" class="w-full sm:w-4/5 md:w-4/5 object-contain rounded-xl shadow-lg"/>
         </div>
-        <div class="space-y-12 md:space-y-16">
-            <div class="flex flex-col lg:flex-row items-center gap-8 bg-white rounded-2xl border border-gray-200 p-6 md:p-8">
-                <div class="lg:w-1/2">
-                    <img src="assets/images/serviceCareer.png" alt="Career Guidance" class="w-full sm:w-3/4 md:w-1/2 lg:w-3/5 xl:w-2/3 h-auto object-contain mx-auto"/>
-                </div>
-                <div class="lg:w-1/2">
-                    <h3 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-4">Career Guidance</h3>
-                    <p class="text-gray-600 mb-6 text-justify leading-relaxed">Career guidance works by combining professional expertise with personalized assessment to help individuals identify their skills, interests, and goals. It then provides actionable insights and strategies to navigate the job market effectively, empowering individuals to make informed career decisions and achieve their aspirations.</p>
-                    <button class="px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-medium rounded-lg hover:shadow-lg transition-all">Take a Free Career Guidance Session »</button>
-                </div>
+        <!-- Text Column -->
+        <div class="w-full md:w-1/2 flex flex-col justify-center gap-4">
+            <div>
+                <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2">Career Guidance</h3>
+                <p class="text-gray-600 text-sm md:text-base mb-4 leading-relaxed">
+                    Our career guidance helps students identify their strengths, interests, and suitable career paths.
+                </p>
+                <button class="mb-6 px-6 py-3 bg-gradient-to-r from-orange-500 to-red-600 text-white text-base font-semibold rounded-lg hover:shadow-xl transition-all">
+                    Get Career Guidance »
+                </button>
             </div>
-            <div class="flex flex-col lg:flex-row-reverse items-center gap-8 bg-white rounded-2xl border border-gray-200 p-6 md:p-8">
-                <div class="lg:w-1/2"><img src="assets/images/serviceEntrance.png" alt="Entrance Exam Guidance" class="w-full sm:w-3/4 md:w-1/2 lg:w-3/5 xl:w-2/3 h-auto object-contain mx-auto"/></div>
-                <div class="lg:w-1/2">
-                    <h3 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-4">Entrance Exam Guidance</h3>
-                    <p class="text-gray-600 mb-6 text-justify leading-relaxed">Career counseling operates by offering one-on-one sessions with trained counselors who assess an individual's strengths, weaknesses, and aspirations. Through a holistic approach, they provide tailored advice, resources, and strategies to guide clients in making informed career choices and achieving their professional goals.</p>
-                    <button class="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg hover:shadow-lg transition-all">Take a Free Entrance Guidance Session »</button>
-                </div>
-            </div>
-            <div class="flex flex-col lg:flex-row items-center gap-8 bg-white rounded-2xl border border-gray-200 p-6 md:p-8">
-                <div class="lg:w-1/2"><img src="assets/images/serviceAdmission.png" alt="Admission Guidance" class="w-full sm:w-3/4 md:w-1/2 lg:w-3/5 xl:w-2/3 object-contain mx-auto"/></div>
-                <div class="lg:w-1/2">
-                    <h3 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-4">Admission Guidance</h3>
-                    <p class="text-gray-600 mb-6 text-justify leading-relaxed">Taking an aptitude test is crucial for finding the best career fit, as it assesses one's innate abilities and interests, guiding individuals towards professions that align with their natural strengths. This personalized insight helps in making informed career choices, leading to greater job satisfaction and success.</p>
-                    <button class="px-6 py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white font-medium rounded-lg hover:shadow-lg transition-all">Take a Free Admission Guidance Session »</button>
-                </div>
+            <div>
+                <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2">Career Counselling</h3>
+                <p class="text-gray-600 text-sm md:text-base mb-4 leading-relaxed">
+                    One-on-one counselling for personalized career planning and strategy development.
+                </p>
+                <button class="px-6 py-3 bg-gradient-to-r from-orange-500 to-red-600 text-white text-base font-semibold rounded-lg hover:shadow-xl transition-all">
+                    Book Counselling »
+                </button>
             </div>
         </div>
     </div>
 
+    <!-- Entrance Exam Section (Image RIGHT) -->
+    <div class="flex flex-col md:flex-row-reverse items-center gap-8 bg-white rounded-2xl border border-gray-200 p-6 md:p-10 mb-10 shadow-md">
+        <!-- Image Column -->
+        <div class="relative w-full md:w-1/2 flex justify-center">
+            <div class="absolute top-4 right-0 bg-gradient-to-r from-blue-500 to-purple-600 
+            text-white font-bold text-sm md:text-base px-4 py-1 rounded-tl-lg rounded-bl-lg shadow-lg z-10 animate-pulse">
+                Entrance Exam
+            </div>
+            <img src="assets/images/serviceEntrance.png" alt="Entrance Exam Guidance" class="w-full sm:w-4/5 md:w-4/5 object-contain rounded-xl shadow-lg"/>
+        </div>
+        <!-- Text Column -->
+        <div class="w-full md:w-1/2 flex flex-col justify-center gap-4">
+            <div>
+                <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2">Exam Guidance</h3>
+                <p class="text-gray-600 text-sm md:text-base mb-4 leading-relaxed">
+                    Comprehensive guidance for JEE, NEET, and other competitive entrance exams with study strategies.
+                </p>
+                <button class="mb-6 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-base font-semibold rounded-lg hover:shadow-xl transition-all">
+                    Get Exam Guidance »
+                </button>
+            </div>
+            <div>
+                <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2">Exam Counselling</h3>
+                <p class="text-gray-600 text-sm md:text-base mb-4 leading-relaxed">
+                    Personalized counselling for exam preparation, time management, and stress handling.
+                </p>
+                <button class="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-base font-semibold rounded-lg hover:shadow-xl transition-all">
+                    Book Counselling »
+                </button>
+            </div>
+        </div>
+    </div>
+
+<!-- Admission Guidance Section (Image LEFT with Ribbon & Vertical Images) -->
+<div class="flex flex-col md:flex-row items-center gap-8 bg-white rounded-2xl border border-gray-200 p-6 md:p-10 shadow-md">
+    <!-- Image Column -->
+    <div class="relative w-full md:w-1/2 flex flex-col gap-4 items-center">
+        <!-- Ribbon Label on TOP-LEFT -->
+        <div class="absolute top-4 left-0 bg-gradient-to-r from-green-500 to-teal-600 text-white font-bold text-sm md:text-base px-4 py-1 rounded-tr-lg rounded-br-lg shadow-lg z-10 animate-pulse">
+            Admission
+        </div>
+
+        <!-- Top Image -->
+        <img src="assets/images/serviceAdmission.png" alt="Admission Guidance" class="w-full sm:w-4/5 md:w-full object-contain rounded-xl shadow-lg mt-6"/>
+
+        <!-- Bottom Image (Optional: e.g., Counselling) -->
+        <mg src="assets/images/serviceAdmissionCounselling.png" alt="Admission Counselling" class="w-full sm:w-4/5 md:w-full object-contain rounded-xl shadow-lg"/>
+    </div>
+
+    <!-- Text Column -->
+    <div class="w-full md:w-1/2 flex flex-col justify-center gap-4">
+        <div>
+            <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2">Admission Guidance</h3>
+            <p class="text-gray-600 text-sm md:text-base mb-4 leading-relaxed">
+                Our admission guidance helps students understand eligibility, documentation, and counselling rounds.
+            </p>
+            <button class="px-6 py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white text-base font-semibold rounded-lg hover:shadow-xl transition-all">
+                Get Admission Guidance »
+            </button>
+        </div>
+        <div>
+            <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2">Admission Counselling</h3>
+            <p class="text-gray-600 text-sm md:text-base mb-4 leading-relaxed">
+                One-on-one counselling ensures correct college and course selection based on preferences and scores.
+            </p>
+            <button class="px-6 py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white text-base font-semibold rounded-lg hover:shadow-xl transition-all">
+                Book Counselling »
+            </button>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+<style>
+/* Simple hover effects */
+button {
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+/* Responsive image sizing */
+img {
+    max-height: 250px;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .flex-col.md\:flex-row {
+        flex-direction: column;
+    }
+    
+    .w-full.md\:w-1\/2 {
+        width: 100%;
+    }
+    
+    img {
+        max-height: 200px;
+        margin: 0 auto;
+    }
+}
+
+/* Ensure equal spacing */
+.mb-8 {
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 640px) {
+    .mb-8 {
+        margin-bottom: 1.5rem;
+    }
+    
+    .p-4 {
+        padding: 1rem;
+    }
+}
+</style>
     <!-- Statistics Section -->
     <div class="bg-orange-500 text-white py-12 md:py-16">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -537,91 +1396,793 @@ function card(c){
             </div>
         </div>
     </div>
-
-    <!-- Student Testimonials Section - Full Width -->
-    <div class="testimonials-full-width bg-gradient-to-b from-gray-50 to-white py-12 md:py-16 overflow-hidden">
-        <div class="text-center mb-10 md:mb-14">
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3">Student Testimonials</h2>
-        </div>
-        <div class="testimonials-scroll-container">
-            <div class="gradient-overlay-left"></div>
-            <div class="gradient-overlay-right"></div>            
-            <div class="animate-infinite-scroll">
-                <?php
-                $testimonials = [
-                    [
-                        'name' => 'Sakshi Ingale',
-                        'college' => 'Seth G S Medical College (KEM), Mumbai',
-                        'image' => 'assets/images/sakshiIngale.png',
-                        'rating' => 'assets/images/ratingStar.png',
-                        'text' => 'Career Niti helped me in proper per result procedures like form filling was kept in batches so that students don\'t have to wait for their turn to come n waste their preparatory time. Many informative n guiding google meets were arranged that kept me up to date with the live notifications n I didn\'t have to keep searching. After results admission related queries were solved through google meetings. The round procedures were smooth enough n the staff was always available for any queries.'
-                    ],
-                    [
-                        'name' => 'Kartikeyan Rajan Kumar',
-                        'college' => 'IIT Bhilai',
-                        'image' => 'assets/images/kartikeyan.png',
-                        'rating' => 'assets/images/ratingStar.png',
-                        'text' => 'I received assistance from Career Niti in understanding appropriate procedures based on the results for form filling. I was able to stay updated with live notifications. They organized Google meets to resolve the queries. The personnel was always willing to answer any questions and the round procedures went smoothly. They provide effective and beneficial guidance.'
-                    ],
-                    [
-                        'name' => 'Sumit Garad',
-                        'college' => 'IIT Palakkad',
-                        'image' => 'assets/images/sumitGarad.png',
-                        'rating' => 'assets/images/ratingStar4.png',
-                        'text' => 'From start to finish, CareerNiti demonstrated a commitment to excellence that significantly eased the often stressful journey of applying to colleges. The team at CareerNiti is comprised of knowledgeable and dedicated professionals who are well-versed in the intricacies of the admission process.'
-                    ],
-                    [
-                        'name' => 'Bhushan Shinde',
-                        'college' => 'IISER Pune',
-                        'image' => 'assets/images/bhushanShinde.png',
-                        'rating' => 'assets/images/ratingStar.png',
-                        'text' => 'Suraj sir from Career Niti provided valuable guidance on medical field options and IISER, suggesting a career in the research field. His professionalism, knowledge, and experience in guiding students through the complex admissions and counseling processes are commendable.'
-                    ],
-                    [
-                        'name' => 'Sumit Garad',
-                        'college' => 'IIT Palakkad',
-                        'image' => 'assets/images/sumitGarad.png',
-                        'rating' => 'assets/images/ratingStar4.png',
-                        'text' => 'From start to finish, CareerNiti demonstrated a commitment to excellence that significantly eased the often stressful journey of applying to colleges. The team at CareerNiti is comprised of knowledgeable and dedicated professionals who are well-versed in the intricacies of the admission process.'
-                    ],
-                    [
-                        'name' => 'Sakshi Ingale',
-                        'college' => 'Seth G S Medical College (KEM), Mumbai',
-                        'image' => 'assets/images/sakshiIngale.png',
-                        'rating' => 'assets/images/ratingStar.png',
-                        'text' => 'Career Niti helped me in proper per result procedures like form filling was kept in batches so that students don\'t have to wait for their turn to come n waste their preparatory time. Many informative n guiding google meets were arranged that kept me up to date with the live notifications n I didn\'t have to keep searching.'
-                    ],
-                    [
-                        'name' => 'Kartikeyan Rajan Kumar',
-                        'college' => 'IIT Bhilai',
-                        'image' => 'assets/images/kartikeyan.png',
-                        'rating' => 'assets/images/ratingStar.png',
-                        'text' => 'I received assistance from Career Niti in understanding appropriate procedures based on the results for form filling. I was able to stay updated with live notifications. They organized Google meets to resolve the queries. The personnel was always willing to answer any questions.'
-                    ]
-                ];   
-                $duplicatedTestimonials = array_merge($testimonials, $testimonials, $testimonials, $testimonials);                
-                foreach ($duplicatedTestimonials as $index => $testimonial) {
-                    echo '
-                    <div class="flex-shrink-0 w-80 md:w-96 px-4">
-                        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 md:p-8 h-full">
-                            <div class="flex items-start space-x-4 md:space-x-6 mb-6">
-                                <img src="' . $testimonial['image'] . '"  alt="' . $testimonial['name'] . '"class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 border-white shadow-lg flex-shrink-0"/>
-                                <div>
-                                    <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-1">' . $testimonial['name'] . '</h3>
-                                    <p class="text-blue-600 font-medium text-sm md:text-base"> ' . $testimonial['college'] . '</p>
-                                    <div class="mt-2">
-                                        <img src="' . $testimonial['rating'] . '" alt="Rating" class="w-24 md:w-28 h-auto"/>
-                                    </div>
+<!-- Student Testimonials Section - Full Width -->
+<div class="testimonials-full-width bg-gradient-to-b from-gray-50 to-white py-12 md:py-16 overflow-hidden">
+    <div class="text-center mb-10 md:mb-14">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3">Student Testimonials</h2>
+    </div>
+    
+    <!-- Testimonials Infinite Scroll - SLOWER -->
+    <div class="testimonials-scroll-container mb-20">
+        <div class="gradient-overlay-left"></div>
+        <div class="gradient-overlay-right"></div>            
+        <div class="animate-slow-scroll">
+            <?php
+            $testimonials = [
+                [
+                    'name' => 'Sakshi Ingale',
+                    'college' => 'Seth G S Medical College (KEM), Mumbai',
+                    'image' => 'assets/images/sakshiIngale.png',
+                    'rating' => 'assets/images/ratingStar.png',
+                    'text' => 'Career Niti helped me in proper per result procedures like form filling was kept in batches so that students don\'t have to wait for their turn to come n waste their preparatory time. Many informative n guiding google meets were arranged that kept me up to date with the live notifications n I didn\'t have to keep searching. After results admission related queries were solved through google meetings. The round procedures were smooth enough n the staff was always available for any queries.'
+                ],
+                [
+                    'name' => 'Kartikeyan Rajan Kumar',
+                    'college' => 'IIT Bhilai',
+                    'image' => 'assets/images/kartikeyan.png',
+                    'rating' => 'assets/images/ratingStar.png',
+                    'text' => 'I received assistance from Career Niti in understanding appropriate procedures based on the results for form filling. I was able to stay updated with live notifications. They organized Google meets to resolve the queries. The personnel was always willing to answer any questions and the round procedures went smoothly. They provide effective and beneficial guidance.'
+                ],
+                [
+                    'name' => 'Sumit Garad',
+                    'college' => 'IIT Palakkad',
+                    'image' => 'assets/images/sumitGarad.png',
+                    'rating' => 'assets/images/ratingStar4.png',
+                    'text' => 'From start to finish, CareerNiti demonstrated a commitment to excellence that significantly eased the often stressful journey of applying to colleges. The team at CareerNiti is comprised of knowledgeable and dedicated professionals who are well-versed in the intricacies of the admission process.'
+                ],
+                [
+                    'name' => 'Bhushan Shinde',
+                    'college' => 'IISER Pune',
+                    'image' => 'assets/images/bhushanShinde.png',
+                    'rating' => 'assets/images/ratingStar.png',
+                    'text' => 'Suraj sir from Career Niti provided valuable guidance on medical field options and IISER, suggesting a career in the research field. His professionalism, knowledge, and experience in guiding students through the complex admissions and counseling processes are commendable.'
+                ],
+                [
+                    'name' => 'Sumit Garad',
+                    'college' => 'IIT Palakkad',
+                    'image' => 'assets/images/sumitGarad.png',
+                    'rating' => 'assets/images/ratingStar4.png',
+                    'text' => 'From start to finish, CareerNiti demonstrated a commitment to excellence that significantly eased the often stressful journey of applying to colleges. The team at CareerNiti is comprised of knowledgeable and dedicated professionals who are well-versed in the intricacies of the admission process.'
+                ],
+                [
+                    'name' => 'Sakshi Ingale',
+                    'college' => 'Seth G S Medical College (KEM), Mumbai',
+                    'image' => 'assets/images/sakshiIngale.png',
+                    'rating' => 'assets/images/ratingStar.png',
+                    'text' => 'Career Niti helped me in proper per result procedures like form filling was kept in batches so that students don\'t have to wait for their turn to come n waste their preparatory time. Many informative n guiding google meets were arranged that kept me up to date with the live notifications n I didn\'t have to keep searching.'
+                ],
+                [
+                    'name' => 'Kartikeyan Rajan Kumar',
+                    'college' => 'IIT Bhilai',
+                    'image' => 'assets/images/kartikeyan.png',
+                    'rating' => 'assets/images/ratingStar.png',
+                    'text' => 'I received assistance from Career Niti in understanding appropriate procedures based on the results for form filling. I was able to stay updated with live notifications. They organized Google meets to resolve the queries. The personnel was always willing to answer any questions.'
+                ]
+            ];   
+            $duplicatedTestimonials = array_merge($testimonials, $testimonials, $testimonials, $testimonials);                
+            foreach ($duplicatedTestimonials as $index => $testimonial) {
+                echo '
+                <div class="flex-shrink-0 w-80 md:w-96 px-4">
+                    <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 md:p-8 h-full">
+                        <div class="flex items-start space-x-4 md:space-x-6 mb-6">
+                            <img src="' . $testimonial['image'] . '"  alt="' . $testimonial['name'] . '"class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 border-white shadow-lg flex-shrink-0"/>
+                            <div>
+                                <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-1">' . $testimonial['name'] . '</h3>
+                                <p class="text-blue-600 font-medium text-sm md:text-base"> ' . $testimonial['college'] . '</p>
+                                <div class="mt-2">
+                                    <img src="' . $testimonial['rating'] . '" alt="Rating" class="w-24 md:w-28 h-auto"/>
                                 </div>
                             </div>
-                            <div class="text-gray-700 leading-relaxed text-sm md:text-base">"' . $testimonial['text'] . '"</div>
+                        </div>
+                        <div class="text-gray-700 leading-relaxed text-sm md:text-base">"' . $testimonial['text'] . '"</div>
+                    </div>
+                </div>';
+            }
+            ?>
+        </div>
+    </div>
+
+    <!-- YouTube Videos Section -->
+    <div class="text-center mb-10 md:mb-14">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3">Student Video Testimonials</h2>
+        <p class="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto px-4">Watch our students share their experiences in their own words</p>
+    </div>
+    
+    <!-- YouTube Videos Carousel - One at a time -->
+    <div class="videos-carousel-container max-w-4xl mx-auto px-4 relative">
+        <div class="relative overflow-hidden rounded-2xl">
+            <div class="videos-carousel-track">
+                <?php
+                $youtubeVideos = [
+                    [
+                        'title' => 'Student Success Story - IIT Journey',
+                        'channel' => 'Career Niti',
+                        'thumbnail' => 'https://img.youtube.com/vi/wjKoBf0hPuA/maxresdefault.jpg',
+                        'youtube_id' => 'wjKoBf0hPuA',
+                        'duration' => '0:59',
+                        'type' => 'shorts'
+                    ],
+                    [
+                        'title' => 'Medical College Admission Experience',
+                        'channel' => 'Career Niti',
+                        'thumbnail' => 'https://img.youtube.com/vi/gx9Vx0hVoVA/maxresdefault.jpg',
+                        'youtube_id' => 'gx9Vx0hVoVA',
+                        'duration' => '0:58',
+                        'type' => 'shorts'
+                    ],
+                    [
+                        'title' => 'Research Career Guidance Success',
+                        'channel' => 'Career Niti',
+                        'thumbnail' => 'https://img.youtube.com/vi/JohUv6QMmks/maxresdefault.jpg',
+                        'youtube_id' => 'JohUv6QMmks',
+                        'duration' => '0:59',
+                        'type' => 'shorts'
+                    ],
+                    [
+                        'title' => 'Career Niti Student Testimonial',
+                        'channel' => 'Career Niti',
+                        'thumbnail' => 'https://img.youtube.com/vi/kwwAX_yWMNQ/maxresdefault.jpg',
+                        'youtube_id' => 'kwwAX_yWMNQ',
+                        'duration' => '2:45',
+                        'type' => 'video'
+                    ],
+                    [
+                        'title' => 'Engineering Admission Success Story',
+                        'channel' => 'Career Niti',
+                        'thumbnail' => 'https://img.youtube.com/vi/-JLUdp0-fyU/maxresdefault.jpg',
+                        'youtube_id' => '-JLUdp0-fyU',
+                        'duration' => '2:30',
+                        'type' => 'video'
+                    ],
+                    [
+                        'title' => 'IIT Preparation Guidance',
+                        'channel' => 'Career Niti',
+                        'thumbnail' => 'https://img.youtube.com/vi/9B9p58cWa10/maxresdefault.jpg',
+                        'youtube_id' => '9B9p58cWa10',
+                        'duration' => '3:15',
+                        'type' => 'video'
+                    ],
+                    [
+                        'title' => 'Parent Feedback & Testimonial',
+                        'channel' => 'Career Niti',
+                        'thumbnail' => 'https://img.youtube.com/vi/gum6oGd_E9E/maxresdefault.jpg',
+                        'youtube_id' => 'gum6oGd_E9E',
+                        'duration' => '4:20',
+                        'type' => 'video'
+                    ]
+                ];
+                
+                foreach ($youtubeVideos as $index => $video) {
+                    $activeClass = $index === 0 ? 'active-video' : '';
+                    $isShorts = $video['type'] === 'shorts';
+                    
+                    echo '
+                    <div class="video-carousel-slide ' . $activeClass . '" data-index="' . $index . '">
+                        <div class="bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
+                            <!-- Video Container with increased height -->
+                            <div class="video-container relative h-[350px] md:h-[450px] lg:h-[500px]">
+                                <!-- YouTube iframe (hidden initially) -->
+                                <div class="youtube-iframe-container hidden absolute inset-0 w-full h-full">
+                                    <iframe 
+                                        class="w-full h-full rounded-t-2xl"
+                                        src="https://www.youtube.com/embed/' . $video['youtube_id'] . '?enablejsapi=1&rel=0&modestbranding=1&autoplay=0"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen
+                                        title="' . $video['title'] . '"
+                                    ></iframe>
+                                </div>
+                                
+                                <!-- Thumbnail (shown initially) -->
+                                <div class="thumbnail-container absolute inset-0 w-full h-full">
+                                    <img src="' . $video['thumbnail'] . '" alt="' . $video['title'] . '" class="w-full h-full object-cover rounded-t-2xl" onerror="this.src=\'https://img.youtube.com/vi/' . $video['youtube_id'] . '/hqdefault.jpg\'"/>
+                                    
+                                    <!-- CENTERED Play Button Container -->
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <button class="video-play-btn group" data-youtube-id="' . $video['youtube_id'] . '" data-index="' . $index . '">
+                                            <!-- Pulsing animation ring -->
+                                            <div class="absolute bg-red-600/30 rounded-full w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 animate-ping"></div>
+                                            <div class="absolute bg-red-500/50 rounded-full w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28"></div>
+                                            
+                                            <!-- Main play button -->
+                                            <div class="relative bg-red-600 rounded-full flex items-center justify-center w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 transition-all duration-300 group-hover:bg-red-700 group-hover:scale-110 shadow-2xl">
+                                                <svg class="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M8 5v14l11-7z"/>
+                                                </svg>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    
+                                    ' . ($isShorts ? '<div class="absolute top-4 right-4 bg-red-500 text-white text-xs md:text-sm font-bold px-2 md:px-3 py-1 md:py-1.5 rounded">SHORTS</div>' : '') . '
+                                </div>
+                            </div>
+                            
+                            <!-- Video Info -->
+                            <div class="p-4 md:p-6">
+                                <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-1">' . $video['title'] . '</h3>
+                                <div class="flex items-center justify-between">
+                                    <p class="text-gray-600 text-sm md:text-base">' . $video['channel'] . '</p>
+                                    <span class="text-gray-500 text-sm">' . $video['duration'] . '</span>
+                                </div>
+                            </div>
                         </div>
                     </div>';
                 }
                 ?>
             </div>
+            
+            <!-- Navigation Buttons -->
+            <button class="carousel-prev absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 md:-translate-x-8 bg-white w-12 h-12 md:w-14 md:h-14 rounded-full shadow-xl flex items-center justify-center hover:bg-gray-50 transition-all duration-300 z-10 group">
+                <svg class="w-6 h-6 text-gray-700 group-hover:text-red-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+            </button>
+            
+            <button class="carousel-next absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 md:translate-x-8 bg-white w-12 h-12 md:w-14 md:h-14 rounded-full shadow-xl flex items-center justify-center hover:bg-gray-50 transition-all duration-300 z-10 group">
+                <svg class="w-6 h-6 text-gray-700 group-hover:text-red-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </button>
+        </div>
+      
+        <!-- Carousel Dots -->
+        <div class="flex justify-center space-x-3 mt-6">
+            <?php for ($i = 0; $i < count($youtubeVideos); $i++): ?>
+                <button class="carousel-dot w-3 h-3 rounded-full transition-all duration-300 <?php echo $i === 0 ? 'bg-red-600 scale-125' : 'bg-gray-300 scale-100'; ?>" data-index="<?php echo $i; ?>"></button>
+            <?php endfor; ?>
+        </div>
+        
+        <!-- Video Counter -->
+        <div class="text-center mt-4">
+            <span class="text-gray-600 font-medium text-sm">
+                Video <span id="current-video" class="font-bold text-red-600">1</span> of <?php echo count($youtubeVideos); ?>
+            </span>
         </div>
     </div>
+</div>
+
+<style>
+/* Testimonials Scroll Container */
+.testimonials-scroll-container {
+    position: relative;
+    overflow: hidden;
+    padding: 2rem 0;
+}
+
+.gradient-overlay-left,
+.gradient-overlay-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 150px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.gradient-overlay-left {
+    left: 0;
+    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 50%, transparent 100%);
+}
+
+.gradient-overlay-right {
+    right: 0;
+    background: linear-gradient(to left, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 50%, transparent 100%);
+}
+
+/* VERY SLOW Infinite Scroll Animation for Testimonials */
+.animate-slow-scroll {
+    display: flex;
+    animation: slow-scroll 120s linear infinite;
+    width: max-content;
+    will-change: transform;
+}
+
+.animate-slow-scroll:hover {
+    animation-play-state: paused;
+}
+
+/* Slower animation for better readability */
+@keyframes slow-scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Even slower on mobile for better viewing */
+@media (max-width: 768px) {
+    .animate-slow-scroll {
+        animation: slow-scroll 150s linear infinite;
+    }
+    
+    .gradient-overlay-left,
+    .gradient-overlay-right {
+        width: 80px;
+    }
+}
+
+/* Testimonial card hover effects */
+.flex-shrink-0 .bg-white {
+    transition: all 0.3s ease;
+}
+
+.flex-shrink-0 .bg-white:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.flex-shrink-0 {
+    flex-shrink: 0;
+}
+
+/* Video Carousel Styles */
+.videos-carousel-container {
+    position: relative;
+    
+}
+
+.videos-carousel-track {
+    display: flex;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+}
+
+.video-carousel-slide {
+    min-width: 100%;
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    display: none;
+}
+
+.video-carousel-slide.active-video {
+    opacity: 1;
+    display: block;
+    animation: slideFadeIn 0.7s ease forwards;
+}
+
+/* Video Container with increased height */
+.video-container {
+    position: relative;
+    background: #000;
+}
+
+/* YouTube iframe styling */
+.youtube-iframe-container iframe {
+    background: #000;
+}
+
+/* Thumbnail container */
+.thumbnail-container {
+    transition: opacity 0.3s ease;
+}
+
+.thumbnail-container.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Play button styling */
+.video-play-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
+}
+
+.video-play-btn.playing {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.video-play-btn .relative {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Pulsing animation */
+@keyframes ping {
+    75%, 100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.animate-ping {
+    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* YouTube Shorts badge */
+.bg-red-500.text-white {
+    background-color: #FF0000 !important;
+}
+
+/* Auto-play animation for carousel */
+@keyframes slideFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.carousel-dot.active {
+    background-color: #dc2626;
+    transform: scale(1.3);
+}
+
+/* Responsive adjustments for carousel */
+@media (max-width: 640px) {
+    .video-container {
+        height: 280px !important;
+    }
+    
+    .video-play-btn .relative {
+        width: 12px !important;
+        height: 12px !important;
+    }
+    
+    .video-play-btn svg {
+        width: 6px !important;
+        height: 6px !important;
+    }
+    
+    .carousel-prev,
+    .carousel-next {
+        width: 40px !important;
+        height: 40px !important;
+        -translate-x-2: -translate-x-2 !important;
+        translate-x-2: translate-x-2 !important;
+    }
+    
+    .carousel-prev svg,
+    .carousel-next svg {
+        width: 5px !important;
+        height: 5px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .videos-carousel-container {
+        padding: 0 15px;
+    }
+    
+    .video-container {
+        height: 350px !important;
+    }
+    
+    .carousel-prev {
+        left: 10px;
+    }
+    
+    .carousel-next {
+        right: 10px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .video-container {
+        height: 500px;
+    }
+}
+
+/* Ensure play button stays centered */
+.absolute.inset-0.flex.items-center.justify-center {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Prevent layout shifts */
+.video-carousel-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Mobile touch improvements */
+@media (hover: none) and (pointer: coarse) {
+    .video-play-btn .relative {
+        width: 70px !important;
+        height: 70px !important;
+    }
+    
+    .video-play-btn svg {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    
+    .carousel-prev,
+    .carousel-next {
+        width: 44px !important;
+        height: 44px !important;
+        background: rgba(255, 255, 255, 0.95);
+    }
+}
+
+/* Fix for older browsers */
+.video-play-btn {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Smooth transitions */
+* {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Load YouTube API
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // YouTube players array
+    let youtubePlayers = {};
+    let currentPlayingVideo = null;
+    
+    // Video Carousel Functionality
+    const carouselTrack = document.querySelector('.videos-carousel-track');
+    const slides = document.querySelectorAll('.video-carousel-slide');
+    const prevBtn = document.querySelector('.carousel-prev');
+    const nextBtn = document.querySelector('.carousel-next');
+    const dots = document.querySelectorAll('.carousel-dot');
+    const currentVideoSpan = document.getElementById('current-video');
+    const totalVideos = slides.length;
+    
+    let currentIndex = 0;
+    let autoPlayInterval;
+    let isAnimating = false;
+    
+    // YouTube API ready callback
+    window.onYouTubeIframeAPIReady = function() {
+        // Initialize YouTube players for all slides
+        slides.forEach((slide, index) => {
+            const youtubeId = slide.querySelector('.video-play-btn').getAttribute('data-youtube-id');
+            const iframeContainer = slide.querySelector('.youtube-iframe-container');
+            
+            youtubePlayers[index] = new YT.Player(iframeContainer.querySelector('iframe'), {
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        });
+    };
+    
+    function onPlayerStateChange(event) {
+        // Handle player state changes if needed
+        if (event.data === YT.PlayerState.ENDED) {
+            // Video ended, show thumbnail again
+            const player = event.target;
+            const slideIndex = Object.keys(youtubePlayers).find(key => youtubePlayers[key] === player);
+            const slide = slides[slideIndex];
+            
+            if (slide) {
+                const thumbnailContainer = slide.querySelector('.thumbnail-container');
+                const playBtn = slide.querySelector('.video-play-btn');
+                const iframeContainer = slide.querySelector('.youtube-iframe-container');
+                
+                thumbnailContainer.classList.remove('hidden');
+                playBtn.classList.remove('playing');
+                iframeContainer.classList.add('hidden');
+            }
+        }
+    }
+    
+    function stopAllVideos() {
+        // Stop all playing videos
+        Object.values(youtubePlayers).forEach(player => {
+            if (player && player.stopVideo) {
+                player.stopVideo();
+            }
+        });
+        
+        // Reset all slides to show thumbnail
+        slides.forEach(slide => {
+            const thumbnailContainer = slide.querySelector('.thumbnail-container');
+            const playBtn = slide.querySelector('.video-play-btn');
+            const iframeContainer = slide.querySelector('.youtube-iframe-container');
+            
+            if (thumbnailContainer && playBtn && iframeContainer) {
+                thumbnailContainer.classList.remove('hidden');
+                playBtn.classList.remove('playing');
+                iframeContainer.classList.add('hidden');
+            }
+        });
+        
+        currentPlayingVideo = null;
+    }
+    
+    function playVideo(index) {
+        stopAllVideos();
+        
+        const slide = slides[index];
+        const playBtn = slide.querySelector('.video-play-btn');
+        const thumbnailContainer = slide.querySelector('.thumbnail-container');
+        const iframeContainer = slide.querySelector('.youtube-iframe-container');
+        
+        if (playBtn && thumbnailContainer && iframeContainer && youtubePlayers[index]) {
+            // Hide thumbnail, show iframe
+            thumbnailContainer.classList.add('hidden');
+            playBtn.classList.add('playing');
+            iframeContainer.classList.remove('hidden');
+            
+            // Play the video
+            youtubePlayers[index].playVideo();
+            currentPlayingVideo = index;
+        }
+    }
+    
+    function updateCarousel() {
+        if (isAnimating) return;
+        
+        isAnimating = true;
+        
+        // Stop any playing video when changing slides
+        stopAllVideos();
+        
+        // Hide all slides
+        slides.forEach(slide => {
+            slide.classList.remove('active-video');
+            slide.style.display = 'none';
+        });
+        
+        // Show current slide
+        slides[currentIndex].classList.add('active-video');
+        slides[currentIndex].style.display = 'block';
+        
+        // Update dots
+        dots.forEach((dot, index) => {
+            if (index === currentIndex) {
+                dot.classList.add('bg-red-600', 'scale-125');
+                dot.classList.remove('bg-gray-300', 'scale-100');
+            } else {
+                dot.classList.remove('bg-red-600', 'scale-125');
+                dot.classList.add('bg-gray-300', 'scale-100');
+            }
+        });
+        
+        // Update video counter
+        currentVideoSpan.textContent = currentIndex + 1;
+        
+        // Reset animation flag
+        setTimeout(() => {
+            isAnimating = false;
+        }, 700);
+    }
+    
+    function nextSlide() {
+        if (isAnimating) return;
+        currentIndex = (currentIndex + 1) % totalVideos;
+        updateCarousel();
+    }
+    
+    function prevSlide() {
+        if (isAnimating) return;
+        currentIndex = (currentIndex - 1 + totalVideos) % totalVideos;
+        updateCarousel();
+    }
+    
+    function goToSlide(index) {
+        if (isAnimating || index === currentIndex) return;
+        currentIndex = index;
+        updateCarousel();
+    }
+    
+    // Auto-play functionality for carousel
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(nextSlide, 8000);
+    }
+    
+    function stopAutoPlay() {
+        clearInterval(autoPlayInterval);
+    }
+    
+    // Event Listeners
+    prevBtn.addEventListener('click', () => {
+        stopAutoPlay();
+        prevSlide();
+        setTimeout(startAutoPlay, 10000);
+    });
+    
+    nextBtn.addEventListener('click', () => {
+        stopAutoPlay();
+        nextSlide();
+        setTimeout(startAutoPlay, 10000);
+    });
+    
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            stopAutoPlay();
+            goToSlide(index);
+            setTimeout(startAutoPlay, 10000);
+        });
+    });
+    
+    // Video play buttons
+    const playButtons = document.querySelectorAll('.video-play-btn');
+    playButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const index = parseInt(this.getAttribute('data-index'));
+            playVideo(index);
+            stopAutoPlay(); // Stop carousel auto-play when video is playing
+        });
+    });
+    
+    // Pause auto-play on hover
+    if (carouselTrack) {
+        carouselTrack.addEventListener('mouseenter', stopAutoPlay);
+        carouselTrack.addEventListener('mouseleave', startAutoPlay);
+    }
+    
+    // Touch/swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+     
+    if (carouselTrack) {
+        carouselTrack.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+            stopAutoPlay();
+        }, { passive: true });
+        
+        carouselTrack.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+            setTimeout(startAutoPlay, 5000);
+        }, { passive: true });
+    }
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                nextSlide(); // Swipe left
+            } else {
+                prevSlide(); // Swipe right
+            }
+        }
+    }
+    
+    // Testimonials pause on hover
+    const testimonialScroll = document.querySelector('.animate-slow-scroll');
+    if (testimonialScroll) {
+        testimonialScroll.addEventListener('mouseenter', () => {
+            testimonialScroll.style.animationPlayState = 'paused';
+        });
+        
+        testimonialScroll.addEventListener('mouseleave', () => {
+            testimonialScroll.style.animationPlayState = 'running';
+        });
+    }
+    
+    // Stop video when changing slides
+    const originalUpdateCarousel = updateCarousel;
+    updateCarousel = function() {
+        stopAllVideos();
+        originalUpdateCarousel();
+    };
+    
+    // Initialize
+    updateCarousel();
+    startAutoPlay();
+});
+</script> 
 
     <!-- Associations Section - Full Width -->
     <div class="associations-full-width bg-white py-12 md:py-16">
@@ -699,7 +2260,18 @@ function card(c){
             
             try {
                 const categoryData = parseCategoryData(button);
-                currentCategory = categoryData;                
+                currentCategory = categoryData;
+                
+                // Check if it's a predictor category that requires login
+                const predictorCategories = ['engineering-predictor', 'medical-predictor'];
+                
+                if (predictorCategories.includes(categoryData.id)) {
+                    // Redirect to login page
+                    window.location.href = 'login.php';
+                    return; // Stop further execution
+                }
+                
+                // For non-predictor categories, show the modal
                 if (isMobile) {
                     showMobileModal(categoryData);
                 } else {
